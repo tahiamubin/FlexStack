@@ -2,14 +2,30 @@
 
 import { useEffect, useState, useRef } from "react";
 
-
 import toast from "react-hot-toast";
 import { imageUpload } from "@/lib/imageUpload";
-import { Button, FieldError, Input, Label, TextArea, TextField, Select } from "@heroui/react";
+import {
+  Button,
+  FieldError,
+  Input,
+  Label,
+  TextArea,
+  TextField,
+  Select,
+} from "@heroui/react";
 import { SelectItem } from "@gravity-ui/uikit";
 import { HiSparkles } from "react-icons/hi2";
-import { FiFileText, FiHash, FiImage, FiSend, FiTag, FiUsers, FiX } from "react-icons/fi";
-
+import {
+  FiFileText,
+  FiHash,
+  FiImage,
+  FiSend,
+  FiTag,
+  FiUsers,
+  FiX,
+} from "react-icons/fi";
+import { getUserSession } from "@/lib/core/session";
+import { authClient } from "@/lib/auth-client";
 
 const AddForumPost = () => {
   const [mounted, setMounted] = useState(false);
@@ -18,19 +34,12 @@ const AddForumPost = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const fileInputRef = useRef(null);
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  const categories = [
-    { value: "workout", label: " Workout Tips" },
-    { value: "nutrition", label: " Nutrition & Diet" },
-    { value: "motivation", label: "Motivation" },
-    { value: "equipment", label: "Equipment Reviews" },
-    { value: "events", label: " Events & Meetups" },
-    { value: "general", label: " General Discussion" },
-  ];
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -68,6 +77,8 @@ const AddForumPost = () => {
     e.preventDefault();
     setIsUploading(true);
 
+    //console.log(user)
+
     try {
       const formData = new FormData(e.currentTarget);
       const data = Object.fromEntries(formData.entries());
@@ -76,7 +87,7 @@ const AddForumPost = () => {
       let imageUrl = null;
       if (data.image && data.image.size > 0) {
         const uploadedImage = await imageUpload(data.image);
-        console.log('image',uploadedImage)
+        console.log("image", uploadedImage);
         imageUrl = uploadedImage.url;
       }
 
@@ -86,11 +97,13 @@ const AddForumPost = () => {
         description: data.description,
         image: imageUrl,
         tags: data.tags ? data.tags.split(",").map((tag) => tag.trim()) : [],
-        author: data.author || "Anonymous",
+        userRole: user?.role || "Anonymous",
+        userId: user?.id || "Anonymous",
         createdAt: new Date().toISOString(),
       };
 
       console.log("Post data:", postData);
+
       // TODO: Send to API
 
       // Show success message
@@ -127,17 +140,6 @@ const AddForumPost = () => {
       <div className="relative z-10 mx-auto max-w-4xl px-6 py-16 sm:px-10 lg:px-16">
         {/* Header */}
         <div className="mb-12 text-center">
-          <div
-            className={`mb-5 flex items-center justify-center gap-2 transition-all duration-700 ease-out ${
-              mounted ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-            }`}
-          >
-            <HiSparkles className="h-4 w-4 text-lime-300" />
-            <span className="text-xs font-bold uppercase tracking-[0.3em] text-lime-300">
-              Create Post
-            </span>
-          </div>
-
           <h1
             className={`text-4xl font-bold uppercase italic leading-[1.1] tracking-tight text-white transition-all duration-700 ease-out sm:text-5xl ${
               mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
@@ -273,8 +275,6 @@ const AddForumPost = () => {
               />
               <FieldError className="text-red-400" />
             </TextField>
-
-           
 
             {/* Tags */}
             <TextField name="tags">

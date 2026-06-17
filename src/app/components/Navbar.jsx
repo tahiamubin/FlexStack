@@ -13,7 +13,7 @@ import { MdDashboard } from "react-icons/md";
 const Navbar = () => {
   const { data: session } =  authClient.useSession();
   const user = session?.user;
-  console.log("user", user);
+  //console.log("user", user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSignOut = async () => {
