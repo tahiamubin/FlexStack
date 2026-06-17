@@ -26,6 +26,7 @@ import {
 } from "react-icons/fi";
 import { getUserSession } from "@/lib/core/session";
 import { authClient } from "@/lib/auth-client";
+import { createCommunity } from "@/lib/actions/community";
 
 const AddForumPost = () => {
   const [mounted, setMounted] = useState(false);
@@ -90,6 +91,7 @@ const AddForumPost = () => {
         console.log("image", uploadedImage);
         imageUrl = uploadedImage.url;
       }
+      console.log("image", imageUrl);
 
       // Prepare post data
       const postData = {
@@ -105,9 +107,11 @@ const AddForumPost = () => {
       console.log("Post data:", postData);
 
       // TODO: Send to API
-
+      const res = await createCommunity(postData);
+      if (res.insertedId) {
+        toast.success("Post published successfully! ");
+      }
       // Show success message
-      toast.success("Post published successfully! ");
 
       // Reset form
       e.target.reset();
@@ -267,7 +271,7 @@ const AddForumPost = () => {
               <Input
                 placeholder="Give your post a catchy title..."
                 className="rounded-2xl bg-white/5 border-white/10 text-white placeholder:text-white/40"
-                classNames={{
+                className={{
                   input: "text-white",
                   inputWrapper:
                     "hover:border-lime-300/50 focus:border-lime-300",
