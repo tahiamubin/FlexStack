@@ -88,13 +88,7 @@ const Navbar = () => {
             </li>
           </ul>
 
-          {/* Static auth buttons — replace with user dropdown once auth is ready */}
-          {/* <div className="hidden items-center gap-4 md:flex">
-            <Link href="/signin">Login</Link>
-            <Link href="/signup">
-              <Button>Sign Up</Button>
-            </Link>
-          </div> */}
+          
           {!user && (
             <div className="  hidden items-center gap-4 md:flex ">
               <Link href="/signin">Login</Link>
@@ -138,13 +132,13 @@ const Navbar = () => {
                     onAction={(key) => console.log(`Selected: ${key}`)}
                   >
                     <Dropdown.Item id="new-file" textValue="New file">
-                      {/* <Link
+                      <Link
                         className="flex items-center gap-2"
                         href={`/dashboard/${user?.role}`}
-                      > */}
+                      >
                       <MdDashboard />
                       <Label>Dashboard</Label>
-                      {/* </Link> */}
+                      </Link>
                     </Dropdown.Item>
 
                     <Dropdown.Item id="copy-link" textValue="Copy link">

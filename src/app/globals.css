@@ -1,2 +1,12 @@
 @import "tailwindcss";
 @import "@heroui/styles"; 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Add if not already present */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
