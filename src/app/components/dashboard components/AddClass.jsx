@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import toast from "react-hot-toast";
-import { imageUpload } from "@/lib/imageUpload";
+
 
 import { authClient } from "@/lib/auth-client";
 import { HiSparkles } from "react-icons/hi2";
@@ -26,10 +26,11 @@ import {
   TextField,
   Select,
 } from "@heroui/react";
-
-
+import { createClass } from "@/lib/actions/allClass";
+import { imageUpload } from "@/lib/imageUpload";
 
 const AddClass = () => {
+  
   const [mounted, setMounted] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [fileName, setFileName] = useState("");
@@ -45,7 +46,6 @@ const AddClass = () => {
     setMounted(true);
   }, []);
 
- 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -103,19 +103,19 @@ const AddClass = () => {
         createdAt: new Date().toISOString(),
       };
 
-      console.log(classData)
+      console.log(classData);
 
-      //const res = await createClass(classData);
+      const res = await createClass(classData);
 
-    //   if (res.insertedId) {
-    //     setStatus("pending");
-    //     toast.success("Class submitted for approval!");
-    //     e.target.reset();
-    //     setPreviewUrl(null);
-    //     setFileName("");
-    //     setSelectedCategory("");
-    //     setSelectedDifficulty("");
-    //   }
+      if (res.insertedId) {
+        setStatus("pending");
+        toast.success("Class submitted for approval!");
+        e.target.reset();
+        setPreviewUrl(null);
+        setFileName("");
+        setSelectedCategory("");
+        setSelectedDifficulty("");
+      }
     } catch (error) {
       console.error("Error publishing class:", error);
       toast.error("Failed to publish class. Please try again.");
@@ -191,7 +191,7 @@ const AddClass = () => {
         )} */}
 
         {/* Form */}
-        
+
         <form
           onSubmit={onSubmit}
           className={`space-y-8 transition-all duration-700 ease-out ${
@@ -302,9 +302,9 @@ const AddClass = () => {
                   </span>
                 </Label>
                 <select
-                 name="category" 
+                  name="category"
                   value={selectedCategory}
-                   onChange={(e) => setSelectedCategory(e.target.value)}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
                   className="w-full rounded-2xl bg-white/5 border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-lime-300/50"
                   required
                 >
@@ -312,34 +312,34 @@ const AddClass = () => {
                     Select category
                   </option>
                   <option value="yoga" className="bg-black">
-                     Yoga
+                    Yoga
                   </option>
                   <option value="hiit" className="bg-black">
-                     HIIT
+                    HIIT
                   </option>
                   <option value="pilates" className="bg-black">
-                     Pilates
+                    Pilates
                   </option>
                   <option value="crossfit" className="bg-black">
-                     CrossFit
+                    CrossFit
                   </option>
                   <option value="dance" className="bg-black">
-                     Dance
+                    Dance
                   </option>
                   <option value="meditation" className="bg-black">
-                     Meditation
+                    Meditation
                   </option>
                   <option value="strength" className="bg-black">
-                     Strength Training
+                    Strength Training
                   </option>
                   <option value="cardio" className="bg-black">
-                     Cardio
+                    Cardio
                   </option>
                   <option value="flexibility" className="bg-black">
-                     Flexibility
+                    Flexibility
                   </option>
                   <option value="boxing" className="bg-black">
-                     Boxing
+                    Boxing
                   </option>
                 </select>
               </div>
@@ -353,7 +353,7 @@ const AddClass = () => {
                   </span>
                 </Label>
                 <select
-                name="difficulty" 
+                  name="difficulty"
                   value={selectedDifficulty}
                   onChange={(e) => setSelectedDifficulty(e.target.value)}
                   className="w-full rounded-2xl bg-white/5 border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-lime-300/50"
@@ -363,16 +363,16 @@ const AddClass = () => {
                     Select difficulty
                   </option>
                   <option value="beginner" className="bg-black">
-                     Beginner
+                    Beginner
                   </option>
                   <option value="intermediate" className="bg-black">
-                     Intermediate
+                    Intermediate
                   </option>
                   <option value="advanced" className="bg-black">
-                     Advanced
+                    Advanced
                   </option>
                   <option value="all-levels" className="bg-black">
-                     All Levels
+                    All Levels
                   </option>
                 </select>
               </div>
