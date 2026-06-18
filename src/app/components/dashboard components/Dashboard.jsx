@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button, Drawer } from "@heroui/react";
 import { 
   FiMenu, 
@@ -58,15 +60,22 @@ const navLinksMap = {
   admin: adminNavLinks,
 };
 
+// Exact match for the role's "Overview" root link, prefix match for everything
+// else so nested routes (e.g. /dashboard/member/bookings/123) still highlight.
+function isLinkActive(pathname, href, overviewHref) {
+  if (href === overviewHref) return pathname === href;
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 // NavList Component
-function NavList() {
+function NavList({ onNavigate }) {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const role = user?.role || "member";
-  const [activeIndex, setActiveIndex] = useState(0);
+  const pathname = usePathname();
 
-  // Get nav items based on role
   const navItems = navLinksMap[role] || memberNavLinks;
+  const overviewHref = `/dashboard/${role}`;
 
   return (
     <nav className="flex flex-col gap-1 p-2">
@@ -78,20 +87,20 @@ function NavList() {
         </span>
       </div>
 
-      {navItems.map((item, index) => {
+      {navItems.map((item) => {
         const Icon = item.icon;
-        const isActive = activeIndex === index;
+        const isActive = isLinkActive(pathname, item.href, overviewHref);
 
         return (
-          <button
-            key={item.label}
-            onClick={() => setActiveIndex(index)}
+          <Link
+            key={item.href}
+            href={item.href}
+            onClick={onNavigate}
             className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-all duration-300 ease-out ${
               isActive
                 ? "bg-lime-300/20 text-lime-300 border border-lime-300/30"
                 : "text-white/60 hover:bg-white/5 hover:text-white hover:scale-[1.02]"
             }`}
-            type="button"
           >
             <Icon 
               className={`size-5 transition-all duration-300 ${
@@ -104,14 +113,14 @@ function NavList() {
             {isActive && (
               <span className="ml-auto h-1.5 w-1.5 rounded-full bg-lime-300 animate-pulse" />
             )}
-          </button>
+          </Link>
         );
       })}
     </nav>
   );
 }
 
-// Main Dashboard Component - ADDED children prop
+// Main Dashboard Component
 export function Dashboard({ children }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -201,12 +210,12 @@ export function Dashboard({ children }) {
               </div>
             </Drawer.Header>
             <Drawer.Body className="p-0">
-              <NavList />
+              <NavList onNavigate={() => setIsOpen(false)} />
             </Drawer.Body>
           </Drawer.Content>
         </Drawer>
 
-        {/* Main content - ADDED children here */}
+        {/* Main content */}
         <main className="flex-1 overflow-auto p-6 bg-gradient-to-b from-black to-zinc-950">
           {children}
         </main>

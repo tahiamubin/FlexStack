@@ -81,7 +81,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="font-medium text-white relative transition-colors duration-300 hover:text-gray-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
-              <Link  href="/allpost">All posts</Link>
+              <Link  href="/allclasses">All classes</Link>
             </li>
             <li className="font-medium text-white relative transition-colors duration-300 hover:text-gray-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full" >
               <Link href="/community"> Community Forum</Link>
