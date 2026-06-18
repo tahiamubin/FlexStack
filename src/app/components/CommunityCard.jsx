@@ -1,37 +1,41 @@
 "use client";
 
 import { Button } from "@heroui/react";
+import Link from "next/link";
 import { useState } from "react";
-import { 
-  FiCalendar, 
-  FiHeart, 
+import {
+  FiCalendar,
+  FiHeart,
   FiMessageCircle,
   FiShare2,
   FiBookmark,
   FiChevronRight,
-  FiUser
+  FiUser,
 } from "react-icons/fi";
 
 /**
  * CommunityCard — Display community posts
- * 
+ *
  * Fields: title, role, date, description, image, read more
  * Theme: Black with lime accent
  */
 const CommunityCard = ({ post }) => {
+  
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [likesCount, setLikesCount] = useState(Math.floor(Math.random() * 50) + 5);
+  const [likesCount, setLikesCount] = useState(
+    Math.floor(Math.random() * 50) + 5,
+  );
   const [imageError, setImageError] = useState(false);
 
   // Format date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric',
-      year: 'numeric'
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
     });
   };
 
@@ -47,14 +51,14 @@ const CommunityCard = ({ post }) => {
 
   const handleLike = () => {
     setIsLiked(!isLiked);
-    setLikesCount(prev => isLiked ? prev - 1 : prev + 1);
+    setLikesCount((prev) => (isLiked ? prev - 1 : prev + 1));
   };
 
   // Truncate description
   const truncateText = (text, limit = 120) => {
     if (!text) return "";
     if (text.length <= limit) return text;
-    return text.slice(0, limit) + '...';
+    return text.slice(0, limit) + "...";
   };
 
   return (
@@ -66,15 +70,15 @@ const CommunityCard = ({ post }) => {
           <h3 className="text-xl font-bold text-white transition-colors duration-300 group-hover:text-lime-300">
             {post.title || "Untitled Post"}
           </h3>
-          
+
           <div className="mt-1.5 flex items-center gap-2 text-sm">
             {/* Role */}
             <span className={`font-medium ${getRoleStyle(post.userRole)}`}>
               {post.userRole || "Member"}
             </span>
-            
+
             <span className="text-white/30">•</span>
-            
+
             {/* Date */}
             <span className="text-white/40 flex items-center gap-1">
               <FiCalendar className="h-3.5 w-3.5" />
@@ -88,7 +92,9 @@ const CommunityCard = ({ post }) => {
           onClick={() => setIsBookmarked(!isBookmarked)}
           className="text-white/30 transition-all duration-300 hover:scale-110 hover:text-lime-300 ml-4 flex-shrink-0"
         >
-          <FiBookmark className={`h-5 w-5 transition-all duration-300 ${isBookmarked ? "fill-lime-300 text-lime-300" : ""}`} />
+          <FiBookmark
+            className={`h-5 w-5 transition-all duration-300 ${isBookmarked ? "fill-lime-300 text-lime-300" : ""}`}
+          />
         </button>
       </div>
 
@@ -117,7 +123,9 @@ const CommunityCard = ({ post }) => {
           className="mt-1.5 flex items-center gap-1 text-sm font-medium text-lime-300 transition-all duration-300 hover:gap-2 hover:text-lime-200"
         >
           {isExpanded ? "Read Less" : "Read More"}
-          <FiChevronRight className={`h-4 w-4 transition-all duration-300 ${isExpanded ? "rotate-90" : ""}`} />
+          <FiChevronRight
+            className={`h-4 w-4 transition-all duration-300 ${isExpanded ? "rotate-90" : ""}`}
+          />
         </button>
       )}
 
@@ -128,7 +136,9 @@ const CommunityCard = ({ post }) => {
           onClick={handleLike}
           className="flex items-center gap-1.5 text-sm text-white/40 transition-all duration-300 hover:scale-105 hover:text-lime-300"
         >
-          <FiHeart className={`h-4.5 w-4.5 transition-all duration-300 ${isLiked ? "fill-lime-300 text-lime-300" : ""}`} />
+          <FiHeart
+            className={`h-4.5 w-4.5 transition-all duration-300 ${isLiked ? "fill-lime-300 text-lime-300" : ""}`}
+          />
           <span>{likesCount}</span>
         </button>
 
@@ -138,10 +148,12 @@ const CommunityCard = ({ post }) => {
           <span>{Math.floor(Math.random() * 20) + 1}</span>
         </button>
 
-        {/* Share Button */}
-        <Button className="flex bg-[#84cc16] hover: hover:bg-black items-center gap-1.5 text-sm text-black transition-all duration-300 hover:scale-105 hover:text-lime-300  ml-auto">
-         Read More
-        </Button>
+        {/* read more Button */}
+        <Link href={`/community/${post._id}`}>
+          <Button className="flex bg-[#84cc16] hover: hover:bg-black items-center gap-1.5 text-sm text-black transition-all duration-300 hover:scale-105 hover:text-lime-300  ml-auto">
+            Read More
+          </Button>
+        </Link>
       </div>
     </div>
   );
