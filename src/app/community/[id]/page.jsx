@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   FiCalendar,
@@ -12,6 +13,8 @@ import {
 } from "react-icons/fi";
 import Link from "next/link";
 import { getCommunityForumById } from "@/lib/api/community";
+import Comments from "@/app/components/dashboard components/Comments";
+import CommunityLikes from "@/app/components/CommunityLikes";
 
 const CommunityPostDetails = async ({ params }) => {
   const { id } = await params;
@@ -32,11 +35,14 @@ const CommunityPostDetails = async ({ params }) => {
   const getRoleBadge = (role) => {
     const roles = {
       trainer: "bg-lime-300/20 text-lime-300 border-lime-300/30",
-      member: "bg-blue-300/20 text-blue-300 border-blue-300/30",
+     
       admin: "bg-purple-300/20 text-purple-300 border-purple-300/30",
     };
     return roles[role] || roles.member;
   };
+   
+  console.log(post._id)
+
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -124,19 +130,18 @@ const CommunityPostDetails = async ({ params }) => {
           <div className="flex items-center gap-8">
             {/* Likes */}
             <div className="flex items-center gap-2 text-white/40">
-              <FiHeart className="h-5 w-5 fill-lime-300 text-lime-300" />
-              <span className="text-sm font-medium text-white/60">
-                {Math.floor(Math.random() * 50) + 10}
-              </span>
+             <CommunityLikes postId = {post._id}></CommunityLikes>
             </div>
 
             {/* Comments */}
-            <div className="flex items-center gap-2 text-white/40">
+            {/* <div className="flex items-center gap-2 text-white/40">
               <FiMessageCircle className="h-5 w-5" />
-              <span className="text-sm font-medium text-white/60">
+              <Comments postId = {post._id}></Comments> */}
+              {/* <span className="text-sm font-medium text-white/60">
                 {Math.floor(Math.random() * 20) + 1}
-              </span>
-            </div>
+              </span> */}
+
+            {/* </div> */}
 
             {/* Share */}
             <button className="flex items-center gap-2 text-white/40 transition-all duration-300 hover:text-lime-300">

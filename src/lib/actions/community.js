@@ -2,6 +2,18 @@
 
 const baseUrl = process.env.BASE_URL;
 
+export const createCommunityComment = async (postId, commentData) => {
+  const res = await fetch(`${baseUrl}/api/community-forum/${postId}/comment` , {
+    method: 'POST' ,
+    headers: {
+      'content-type' : 'application/json'
+    },
+    body: JSON.stringify(commentData)
+  })
+  return res.json()
+}
+
+
 export const createCommunity = async (data) => {
   const res = await fetch(`${baseUrl}/api/community-forum`, {
     method: "POST",

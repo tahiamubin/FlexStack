@@ -1,11 +1,16 @@
 "use server";
 const baseURL = process.env.BASE_URL;
+
+export const getCommunityComment = async (postId) => {
+  const res = await fetch(`${baseURL}/api/community-forum/${postId}/comment`);
+  return res.json();
+};
 export const getCommunityForumById = async (id) => {
-  const res = await fetch(`${baseURL}/api/community-forum/${id}`)
-  return res.json()
-}
+  const res = await fetch(`${baseURL}/api/community-forum/${id}`);
+  return res.json();
+};
 export const getCommunity = async () => {
   const res = await fetch(`${baseURL}/api/community-forum`);
-  
+
   return res.json();
 };
