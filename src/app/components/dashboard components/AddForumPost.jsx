@@ -291,7 +291,7 @@ const AddForumPost = () => {
               <Input
                 placeholder="Add tags separated by commas (e.g., fitness, nutrition, motivation)"
                 className="rounded-2xl bg-white/5 border-white/10 text-white placeholder:text-white/40"
-                classNames={{
+                className={{
                   input: "text-white",
                   inputWrapper:
                     "hover:border-lime-300/50 focus:border-lime-300",
@@ -314,7 +314,7 @@ const AddForumPost = () => {
               <TextArea
                 placeholder="Share your story, tips, or ask questions..."
                 className="rounded-3xl bg-white/5 border-white/10 text-white placeholder:text-white/40"
-                classNames={{
+                className={{
                   input: "text-white",
                   inputWrapper:
                     "hover:border-lime-300/50 focus:border-lime-300",
