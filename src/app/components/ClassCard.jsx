@@ -9,9 +9,11 @@ import {
   FiTag,
   FiAward,
   FiHeart,
-  FiBookmark
+  FiBookmark,
+  FiArrowRight
 } from "react-icons/fi";
 import CommunityLikes from "./CommunityLikes";
+import { Button } from "@heroui/react";
 
 const ClassCard = ({ classData }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -110,16 +112,24 @@ const ClassCard = ({ classData }) => {
 
         {/* Actions */}
         <div className="mt-4 flex items-center gap-4 border-t border-white/10 pt-3">
-           <div className="flex items-center gap-2 text-white/40">
-             <CommunityLikes postId = {classData._id}></CommunityLikes>
-            </div>
+          <div className="flex items-center gap-2 text-white/40">
+            <CommunityLikes postId={classData._id} />
+          </div>
 
-          <button
-            onClick={() => setIsBookmarked(!isBookmarked)}
-            className="ml-auto text-white/40 transition-all duration-300 hover:scale-110 hover:text-lime-300"
-          >
-            <FiBookmark className={`h-4 w-4 ${isBookmarked ? "fill-lime-300 text-lime-300" : ""}`} />
-          </button>
+          {/* Price & Book Now */}
+          <div className="ml-auto flex items-center gap-3">
+            <span className="text-lg font-bold text-lime-300">
+              ${classData.price}
+            </span>
+            <Button
+              size="sm"
+              radius="full"
+              className="bg-lime-300 text-black font-bold uppercase text-xs px-4 py-1 transition-all duration-300 hover:scale-105 hover:bg-lime-400 active:scale-95"
+              endContent={<FiArrowRight className="h-3 w-3" />}
+            >
+              Book Now
+            </Button>
+          </div>
         </div>
       </div>
     </div>

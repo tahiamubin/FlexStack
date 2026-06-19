@@ -1,25 +1,33 @@
-import React from 'react';
-import { getAllClass } from '@/lib/api/allClass';
-import ClassCard from '../components/ClassCard';
-
-
+import React from "react";
+import { getAllClass } from "@/lib/api/allClass";
+import ClassCard from "../components/ClassCard";
 
 const allClassPage = async () => {
   const classes = await getAllClass();
-  
+
   // Filter only approved classes
-  const approvedClasses = classes?.filter(classItem => classItem.status === 'approved') || [];
+  const approvedClasses =
+    classes?.filter((classItem) => classItem.status === "approved") || [];
 
   return (
     <div className="space-y-6 m-10">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold uppercase italic text-white">
-          All Classes
-        </h1>
-        <span className="text-sm text-white/40">
-          Showing {approvedClasses.length} approved classes
-        </span>
+      <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+        <div>
+          <h1 className="text-2xl font-bold uppercase italic text-white">
+            All Classes
+          </h1>
+          <p className="text-sm text-white/40 mt-1">
+            Showing {approvedClasses.length} approved{" "}
+            {approvedClasses.length === 1 ? "class" : "classes"}
+          </p>
+        </div>
+        <div className="text-right">
+          <span className="text-xs font-medium uppercase tracking-wider text-lime-300 bg-lime-300/10 px-3 py-1 rounded-full border border-lime-300/20">
+            {approvedClasses.length} Available
+          </span>
+          <div className="h-0.5 w-full bg-lime-300/30 mt-2 rounded-full" />
+        </div>
       </div>
 
       {/* Classes Grid */}

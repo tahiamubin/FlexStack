@@ -10,12 +10,15 @@ const communityForumPage = async () => {
   const postsArray = Array.isArray(posts) ? posts : [posts];
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-6 p-5">
-        <h1 className="text-2xl font-bold uppercase italic text-white">
-          Community Forum
-        </h1>
-        <span className="text-sm text-white/40">{postsArray.length} posts</span>
+    <div className="space-y-6 m-10">
+      <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+        <div>
+          <h1 className="text-2xl font-bold uppercase italic text-white">
+            Community Forum
+          </h1>
+          
+        </div>
+        
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 p-10">
