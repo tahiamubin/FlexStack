@@ -48,9 +48,10 @@ const adminNavLinks = [
   { icon: FiGrid, label: "Overview", href: "/dashboard/admin" },
   { icon: FiUsers, label: "Manage Users", href: "/dashboard/admin/users" },
   { icon: FiCheckCircle, label: "Trainer Applications", href: "/dashboard/admin/applications" },
-  { icon: FiBriefcase, label: "Manage Classes", href: "/dashboard/admin/classes" },
+ 
   { icon: FiFileText, label: "Add Forum Post", href: "/dashboard/admin/add-forum" },
-  { icon: FiClipboard, label: "Forum Posts", href: "/dashboard/admin/forum-posts" },
+   { icon: FiBriefcase, label: "Manage Classes", href: "/dashboard/admin/classes" },
+  { icon: FiClipboard, label: "Manage-Forum Posts", href: "/dashboard/admin/manage-forum" },
   { icon: FiSettings, label: "Settings", href: "/dashboard/admin/settings" },
 ];
 

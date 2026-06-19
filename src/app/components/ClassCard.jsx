@@ -1,32 +1,42 @@
 "use client";
 
 import { useState } from "react";
-import { 
-  FiUser, 
-  FiCalendar, 
-  FiClock, 
+import {
+  FiUser,
+  FiCalendar,
+  FiClock,
   FiDollarSign,
   FiTag,
   FiAward,
   FiHeart,
   FiBookmark,
-  FiArrowRight
+  FiArrowRight,
 } from "react-icons/fi";
 import CommunityLikes from "./CommunityLikes";
 import { Button } from "@heroui/react";
+import { CiSaveDown1 } from "react-icons/ci";
+import { RiHeartAdd2Fill } from "react-icons/ri";
+import { createFavorite } from "@/lib/actions/member";
+import toast from "react-hot-toast";
+import AddFavClass from "./AddFavClass";
 
 const ClassCard = ({ classData }) => {
+  //console.log(classData)
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric',
-      year: 'numeric'
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
     });
+    
   };
+
+  
+  
 
   const getDifficultyColor = (difficulty) => {
     const colors = {
@@ -72,7 +82,9 @@ const ClassCard = ({ classData }) => {
             <FiTag className="h-3 w-3" />
             {classData.category}
           </span>
-          <span className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium border ${getDifficultyColor(classData.difficulty)}`}>
+          <span
+            className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium border ${getDifficultyColor(classData.difficulty)}`}
+          >
             <FiAward className="h-3 w-3" />
             {classData.difficulty}
           </span>
@@ -90,8 +102,7 @@ const ClassCard = ({ classData }) => {
             {classData.duration} min
           </span>
           <span className="flex items-center gap-1">
-            <FiDollarSign className="h-4 w-4" />
-            ${classData.price}
+            <FiDollarSign className="h-4 w-4" />${classData.price}
           </span>
           <span className="flex items-center gap-1">
             <FiCalendar className="h-4 w-4" />
@@ -104,7 +115,7 @@ const ClassCard = ({ classData }) => {
           <div className="flex h-6 w-6 items-center justify-center rounded-full bg-lime-300/10 text-lime-300">
             <FiUser className="h-3 w-3" />
           </div>
-          
+
           <span className="text-[10px] uppercase text-lime-300/60">
             {classData.userRole}
           </span>
@@ -114,6 +125,10 @@ const ClassCard = ({ classData }) => {
         <div className="mt-4 flex items-center gap-4 border-t border-white/10 pt-3">
           <div className="flex items-center gap-2 text-white/40">
             <CommunityLikes postId={classData._id} />
+          </div>
+          <div className="flex items-center gap-2 text-white/40 text-2xl">
+            <AddFavClass classData={classData} ></AddFavClass>
+            
           </div>
 
           {/* Price & Book Now */}
