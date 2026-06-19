@@ -88,13 +88,13 @@ export default function WhyChooseUs() {
             }`}
           >
             <HiSparkles className="h-4 w-4 text-lime-300" />
-            <span className="text-xs font-bold uppercase tracking-[0.3em] text-lime-300">
+            <span className="text-xs font-bold  uppercase tracking-[0.3em] text-lime-300">
               Why Choose Us
             </span>
           </div>
 
           <h2
-            className={`max-w-3xl mx-auto text-2xl font-bold uppercase  tracking-tight text-white transition-all duration-700 ease-out sm:text-5xl lg:text-6xl ${
+            className={`max-w-3xl mx-auto text-2xl  font-bold uppercase italic leading-[1.1] font-bold uppercase  tracking-tight text-white transition-all duration-700 ease-out sm:text-5xl lg:text-6xl ${
               mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
             }`}
             style={{ transitionDelay: "100ms" }}

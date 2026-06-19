@@ -1,21 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import {
-  FiCalendar,
-  FiTrash2,
-  FiUser,
-  FiTag,
-} from "react-icons/fi";
+import { FiCalendar, FiTrash2, FiUser, FiTag } from "react-icons/fi";
 
 import CommunityLikes from "../CommunityLikes";
 
 import { Button, Modal } from "@heroui/react";
 import { Rocket } from "lucide-react";
 
+import toast from "react-hot-toast";
+import { deleteForum } from "@/lib/api/community";
+
 const MyForumPosts = ({ initialPosts }) => {
+  console.log(initialPosts)
   const [posts, setPosts] = useState(initialPosts);
-  
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -26,7 +24,12 @@ const MyForumPosts = ({ initialPosts }) => {
     });
   };
 
-
+  const handleDelete = async(id) => {
+    console.log("Deleting id:", id, "Type:", typeof id);
+    const deleteData = await deleteForum(id);
+     console.log("response:", deleteData);
+    toast.success("Post Deleted successfully!");
+  };
 
   if (posts.length === 0) {
     return (
@@ -79,7 +82,10 @@ const MyForumPosts = ({ initialPosts }) => {
 
                 {/* Delete Button */}
                 <Modal>
-                  <Button  variant="danger" className="text-white/30  transition-all duration-300  disabled:opacity-50 disabled:cursor-not-allowed">
+                  <Button
+                    variant="danger"
+                    className="text-white/30  transition-all duration-300  disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
                     <FiTrash2 className="h-5 w-5 text-white" />
                   </Button>
                   <Modal.Backdrop>
@@ -96,7 +102,12 @@ const MyForumPosts = ({ initialPosts }) => {
                           <p>Are you sure you want to delete this post?</p>
                         </Modal.Body>
                         <Modal.Footer>
-                          <Button  variant="danger" className="w-full" slot="close">
+                          <Button
+                             onClick={() => handleDelete(post._id)}
+                            variant="danger"
+                            className="w-full"
+                            slot="close"
+                          >
                             Continue
                           </Button>
                         </Modal.Footer>

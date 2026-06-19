@@ -38,8 +38,9 @@ const trainerNavLinks = [
   { icon: FiGrid, label: "Overview", href: "/dashboard/trainer" },
   { icon: FiPlusCircle, label: "Add Classes", href: "/dashboard/trainer/add-class" },
   { icon: FiFileText, label: "Add Forum Post", href: "/dashboard/trainer/forum-post" },
+  { icon: FiBookOpen, label: "My Classes", href: "/dashboard/trainer/my-classes" },
   { icon: FiBookOpen, label: "My Forum Posts", href: "/dashboard/trainer/my-forum-post" },
-  { icon: FiSettings, label: "Settings", href: "/dashboard/trainer/settings" },
+ 
 ];
 
 // Admin navigation links
