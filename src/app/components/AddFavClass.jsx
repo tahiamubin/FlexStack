@@ -12,18 +12,20 @@ const AddFavClass = ({ classData }) => {
   const [isLiked, setIsLiked] = useState(false);
 
   const handleFavorite = async () => {
-    if (!user?.id) {
-      toast.error("Please log in to favorite a class");
-      return;
-    }
+    // if (!user?.id) {
+    //   toast.error("Please log in to favorite a class");
+    //   return;
+    // }
 
     try {
       const favPost = await createFavorite({
-        userId: user.id,
-        classId: classData._id,
+
+         MemberId: user.id,
+         classData
+        // classId: classData._id,
       });
 
-      console.log("favPost result:", favPost); // temp, check this in browser console
+      //console.log("favPost result:", favPost); 
 
       if (favPost?.error) {
         toast.error(favPost.error);

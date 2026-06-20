@@ -57,7 +57,7 @@ export default function HeroBanner() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full mt-[-200] min-h-[100vh] overflow-hidden bg-black"
+      className="relative w-full mt-[-160] min-h-[100vh] overflow-hidden bg-black"
     >
       {/* Background image with enhanced parallax */}
       <div 
