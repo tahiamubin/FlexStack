@@ -190,8 +190,9 @@ const ClassDetailsClient = ({ classData }) => {
               <form action="/api/checkout_sessions" method="POST">
               <input type="hidden" name="price" value={classData?.price}></input>
               <input type="hidden" name="className" value={classData?.className}></input>
-              <input  type="hidden" name="productId" value={classData?._id}></input>
+              
               <input  type="hidden" name="schedule" value={classData?.schedule}></input>
+              <input  type="hidden" name="classId" value={classData?._id}></input>
                 <section>
                   <Button
                   type="submit"

@@ -16,6 +16,7 @@ export async function POST(request) {
     const formData = await request.formData(); // formData() is async, needs await
     const price = formData.get("price");
     const className = formData.get("className");
+    const classId = formData.get("classId");
 
     const schedule = formData.get("schedule");
 
@@ -28,6 +29,7 @@ export async function POST(request) {
             unit_amount: Number(price) * 100,
             product_data: {
               name: className,
+              
             },
           },
           quantity: 1,
@@ -39,6 +41,7 @@ export async function POST(request) {
         userEmail: user?.email,
         schedule,
         className,
+        classId,
       },
       mode: "payment",
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,

@@ -2,6 +2,12 @@
 const baseURL = process.env.BASE_URL;
 
 
+export const getBookingsById = async (id) => {
+  const res = await fetch(`${baseURL}/api/payment/${id}`);
+  return res.json();
+};
+
+
 export const getClassesById = async (id) => {
   const res = await fetch(`${baseURL}/api/all-classes/${id}`);
   return res.json();
