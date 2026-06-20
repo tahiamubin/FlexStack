@@ -22,6 +22,7 @@ import toast from "react-hot-toast";
 import AddFavClass from "./AddFavClass";
 
 import PaginationClass from "./dashboard components/PaginationClass";
+import Link from "next/link";
 
 const ClassCard = ({ classData }) => {
   //console.log(classData)
@@ -142,6 +143,7 @@ const ClassCard = ({ classData }) => {
             <span className="text-lg font-bold text-lime-300">
               ${classData.price}
             </span>
+            <Link href={`/allclasses/${classData._id}`}>
             <Button
               size="sm"
               radius="full"
@@ -150,6 +152,8 @@ const ClassCard = ({ classData }) => {
             >
               Book Now
             </Button>
+            </Link>
+            
           </div>
         </div>
       </div>
