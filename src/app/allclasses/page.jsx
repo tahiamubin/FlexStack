@@ -1,9 +1,14 @@
-import React from "react";
+
+
 import { getAllClass } from "@/lib/api/allClass";
 import ClassCard from "../components/ClassCard";
+import Pagination from "../components/dashboard components/PaginationClass";
+import PaginationClass from "../components/dashboard components/PaginationClass";
 
-const allClassPage = async () => {
-  const classes = await getAllClass();
+const allClassPage = async ({ searchParams }) => {
+  const params = await searchParams;
+  const classes = await getAllClass(params.page);
+  
 
   // Filter only approved classes
   const approvedClasses =
@@ -42,6 +47,7 @@ const allClassPage = async () => {
           <p className="text-white/40">No approved classes available</p>
         </div>
       )}
+     
     </div>
   );
 };

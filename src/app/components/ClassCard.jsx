@@ -11,6 +11,7 @@ import {
   FiHeart,
   FiBookmark,
   FiArrowRight,
+  FiChevronLeft,
 } from "react-icons/fi";
 import CommunityLikes from "./CommunityLikes";
 import { Button } from "@heroui/react";
@@ -20,10 +21,15 @@ import { createFavorite } from "@/lib/actions/member";
 import toast from "react-hot-toast";
 import AddFavClass from "./AddFavClass";
 
+import PaginationClass from "./dashboard components/PaginationClass";
+
 const ClassCard = ({ classData }) => {
   //console.log(classData)
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+   const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10;
+
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -147,6 +153,10 @@ const ClassCard = ({ classData }) => {
           </div>
         </div>
       </div>
+
+    
+      
+     
     </div>
   );
 };

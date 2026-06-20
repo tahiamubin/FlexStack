@@ -48,7 +48,7 @@ const CommunityPostDetails = async ({ params }) => {
     <div className="max-w-4xl mx-auto">
       {/* Back Button */}
       <Link
-        href="/dashboard/trainer/forum-posts"
+        href="/community"
         className="inline-flex items-center gap-2 text-white/40 transition-all duration-300 hover:text-lime-300 hover:gap-3 mb-6"
       >
         <FiArrowLeft className="h-5 w-5" />
