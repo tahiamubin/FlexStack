@@ -5,9 +5,10 @@ import ClassCard from "../components/ClassCard";
 import Pagination from "../components/dashboard components/PaginationClass";
 import PaginationClass from "../components/dashboard components/PaginationClass";
 
-const allClassPage = async ({ searchParams }) => {
-  const params = await searchParams;
-  const classes = await getAllClass(params.page);
+const allClassPage = async () => {
+  //const params = await searchParams;
+  const classes = await getAllClass();
+  //console.log(classes)
   
 
   // Filter only approved classes

@@ -8,10 +8,10 @@ export const getBookingsById = async (id) => {
 };
 
 
-export const getClassesById = async (id) => {
-  const res = await fetch(`${baseURL}/api/all-classes/${id}`);
-  return res.json();
-};
+// export const getClassesById = async (id) => {
+//   const res = await fetch(`${baseURL}/api/all-classes/${id}`);
+//   return res.json();
+// };
 
 export const editClass = async (data,postId) => {
    const res = await fetch(`${baseURL}/api/all-class/${postId}` , {
@@ -35,7 +35,7 @@ export const deleteClass = async(postId) => {
    return res.json()
 }
 
-export const getAllClass = async(page) => {
-    const res = await fetch (`${baseURL}/api/all-class?page=${page}`)
+export const getAllClass = async() => {
+    const res = await fetch (`${baseURL}/api/all-class`)
     return res.json()
 }

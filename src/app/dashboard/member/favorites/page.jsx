@@ -4,7 +4,7 @@ import React from 'react';
 
 const page = async () => {
   const favPosts = await getFavoriteClass()
-  //console.log(favPosts)
+  console.log(favPosts)
   return (
     <div>
        <FavoriteClassesClient favorites={favPosts} />
