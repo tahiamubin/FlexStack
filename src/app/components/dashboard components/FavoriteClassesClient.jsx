@@ -15,6 +15,7 @@ import {
 import toast from "react-hot-toast";
 
 const FavoriteClassesClient = ({ favorites = [] }) => {
+  console.log('fac' , favorites)
   const [allFavorites, setAllFavorites] = useState(favorites);
   const [isRemoving, setIsRemoving] = useState(false);
 

@@ -50,7 +50,7 @@ const MyForumPosts = ({ initialPosts }) => {
         </span>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6  md:grid-cols-2">
         {posts.map((post) => (
           <div
             key={post._id}

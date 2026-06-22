@@ -14,6 +14,8 @@ import {
   Select,
   TextField,
 } from "@heroui/react";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // import { redirect } from "next/navigation";
@@ -24,6 +26,7 @@ import { HiSparkles } from "react-icons/hi2";
 
 export default function SignUpPage() {
     const [mounted, setMounted] = useState(false);
+    const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -38,7 +41,8 @@ export default function SignUpPage() {
       plan: 'free',
     });
 
-    redirect('/')
+    // redirect('/')
+     router.push("/");
   };
   
 

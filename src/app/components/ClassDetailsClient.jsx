@@ -29,6 +29,7 @@ const ClassDetailsClient = ({ classData }) => {
       year: "numeric",
     });
   };
+  
 
   const getDifficultyColor = (difficulty) => {
     const colors = {
@@ -188,14 +189,30 @@ const ClassDetailsClient = ({ classData }) => {
             {/* Buy Now Button */}
             <div className="mt-6">
               <form action="/api/checkout_sessions" method="POST">
-              <input type="hidden" name="price" value={classData?.price}></input>
-              <input type="hidden" name="className" value={classData?.className}></input>
-              
-              <input  type="hidden" name="schedule" value={classData?.schedule}></input>
-              <input  type="hidden" name="classId" value={classData?._id}></input>
+                <input
+                  type="hidden"
+                  name="price"
+                  value={classData?.price}
+                ></input>
+                <input
+                  type="hidden"
+                  name="className"
+                  value={classData?.className}
+                ></input>
+
+                <input
+                  type="hidden"
+                  name="schedule"
+                  value={classData?.schedule}
+                ></input>
+                <input
+                  type="hidden"
+                  name="classId"
+                  value={classData?._id}
+                ></input>
                 <section>
                   <Button
-                  type="submit"
+                    type="submit"
                     size="lg"
                     radius="full"
                     className="relative w-full h-14 bg-lime-300 font-bold uppercase tracking-wide text-black transition-all duration-300 hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_40px_rgba(132,204,22,0.3)]"

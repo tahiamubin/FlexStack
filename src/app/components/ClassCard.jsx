@@ -25,6 +25,7 @@ import PaginationClass from "./dashboard components/PaginationClass";
 import Link from "next/link";
 
 const ClassCard = ({ classData }) => {
+
   //console.log(classData)
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);

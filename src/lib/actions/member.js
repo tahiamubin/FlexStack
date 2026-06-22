@@ -1,4 +1,4 @@
-'use server'
+"use server";
 const baseUrl = process.env.BASE_URL;
 
 export const createFavorite = async (data) => {
@@ -15,7 +15,6 @@ export const createFavorite = async (data) => {
     console.error("community-forum API failed:", res.status, text);
     throw new Error(`API request failed with status ${res.status}`);
   }
-
   return res.json();
 };
 

@@ -38,7 +38,7 @@ const LatestForum = async () => {
         </div>
 
         {/* Cards */}
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-3 md:grid-cols-2">
           {posts.map((post) => (
             <CommunityCard key={post._id} post={post} />
           ))}

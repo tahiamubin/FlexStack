@@ -9,9 +9,13 @@ import React from "react";
 const page = async () => {
   const user = await getUserSession();
   const posts = await getAllClass();
-  //console.log(user.id);
-  const userPost = posts?.filter((post) => post.userId === user.id) || [];
-  //console.log(posts)
+  console.log('post',posts)
+  console.log('user',user)
+  const userPost =
+    posts?.filter(
+      (post) => post.userId?.toString() === (user._id || user.id)?.toString(),
+    ) || [];
+  
 
   return (
     <div>

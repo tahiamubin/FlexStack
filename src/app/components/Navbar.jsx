@@ -136,7 +136,7 @@ const Navbar = () => {
                     </Link>
                   </Dropdown.Item>
 
-                  <Dropdown.Item
+                  {/* <Dropdown.Item
                     id="profile"
                     textValue="Profile"
                     className="rounded-xl text-white/60 transition-all duration-300 hover:bg-lime-300/10 hover:text-lime-300"
@@ -145,7 +145,7 @@ const Navbar = () => {
                       <CgProfile className="h-5 w-5" />
                       <Label className="font-medium">Profile</Label>
                     </div>
-                  </Dropdown.Item>
+                  </Dropdown.Item> */}
 
                   <Dropdown.Item
                     id="logout"

@@ -2,7 +2,7 @@
 const baseURL = process.env.BASE_URL;
 
 export const getLatestPost = async () => {
-  const res = await fetch(`${baseURL}/api/community-forum`);
+  const res = await fetch(`${baseURL}/api/community-latest`);
   return res.json();
 };
 export const deleteForum = async (postId) => {

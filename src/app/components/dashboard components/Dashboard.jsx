@@ -30,7 +30,7 @@ const memberNavLinks = [
   { icon: FiCalendar, label: "Booked Classes", href: "/dashboard/member/bookings" },
   { icon: FiHeart, label: "Favorites", href: "/dashboard/member/favorites" },
   { icon: FiUserPlus, label: "Apply as Trainer", href: "/dashboard/member/apply-trainer" },
-  { icon: FiSettings, label: "Settings", href: "/dashboard/member/settings" },
+  
 ];
 
 // Trainer navigation links
@@ -50,9 +50,10 @@ const adminNavLinks = [
   { icon: FiCheckCircle, label: "Trainer Applications", href: "/dashboard/admin/applications" },
  
   { icon: FiFileText, label: "Add Forum Post", href: "/dashboard/admin/add-forum" },
-   { icon: FiBriefcase, label: "Manage Classes", href: "/dashboard/admin/classes" },
+   { icon: FiBriefcase, label: "Manage Classes", href: "/dashboard/admin/manage-classes" },
   { icon: FiClipboard, label: "Manage-Forum Posts", href: "/dashboard/admin/manage-forum" },
-  { icon: FiSettings, label: "Settings", href: "/dashboard/admin/settings" },
+  { icon: FiClipboard, label: "Transactions", href: "/dashboard/admin/transactions" },
+  
 ];
 
 // Map roles to their respective nav links
@@ -161,7 +162,7 @@ export function Dashboard({ children }) {
               <FiMenu className="size-5" />
             </Button>
             <span className="text-sm font-bold uppercase tracking-tight text-white">
-              FitHub
+              FlexStack
             </span>
           </div>
           <div className="flex items-center gap-2">

@@ -2,31 +2,18 @@
 
 import { useState, useEffect } from "react";
 import {
-  FiCalendar,
-  FiHeart,
+  FiBookOpen,
+  FiUsers,
   FiUser,
   FiMail,
   FiAward,
-  FiClock,
-  FiCheckCircle,
-  FiXCircle,
-  FiAlertCircle,
-  FiBookOpen,
-  FiStar,
+  FiCalendar,
+  FiTrendingUp,
+  FiBarChart2,
 } from "react-icons/fi";
 import { HiSparkles } from "react-icons/hi2";
-import Image from "next/image";
 
-const OverviewClient = ({
-  user,
-  bookings,
-  favorites,
-  trainerApplication: trainerApplicationRaw,
-}) => {
-  const trainerApplication = Array.isArray(trainerApplicationRaw)
-    ? trainerApplicationRaw[0]
-    : trainerApplicationRaw;
-  console.log("from client", trainerApplication);
+const TrainerOverviewClient = ({ user, userClasses, allStudents }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -43,30 +30,12 @@ const OverviewClient = ({
     });
   };
 
-  const getStatusColor = (status) => {
-    const colors = {
-      pending: "text-yellow-400 bg-yellow-400/10 border-yellow-400/30",
-      approved: "text-green-400 bg-green-400/10 border-green-400/30",
-      rejected: "text-red-400 bg-red-400/10 border-red-400/30",
-    };
-    return colors[status] || "text-white/40 bg-white/5 border-white/10";
-  };
+  const totalClasses = userClasses?.length || 0;
+  const totalStudents = allStudents?.length || 0;
 
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case "pending":
-        return <FiClock className="h-5 w-5" />;
-      case "approved":
-        return <FiCheckCircle className="h-5 w-5" />;
-      case "rejected":
-        return <FiXCircle className="h-5 w-5" />;
-      default:
-        return <FiAlertCircle className="h-5 w-5" />;
-    }
-  };
-
-  const totalBookings = bookings?.length || 0;
-  const totalFavorites = favorites?.length || 0;
+  // Get unique students
+  const uniqueStudents = [...new Set(allStudents?.map(s => s.userId))] || [];
+  const uniqueStudentCount = uniqueStudents.length;
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-black">
@@ -93,82 +62,108 @@ const OverviewClient = ({
           <div className="flex items-center gap-2 mb-3">
             <HiSparkles className="h-4 w-4 text-lime-300" />
             <span className="text-xs font-bold uppercase tracking-[0.3em] text-lime-300">
-              Dashboard Overview
+              Trainer Dashboard
             </span>
           </div>
           <h1 className="text-3xl font-bold uppercase italic leading-[1.1] tracking-tight text-white">
             Welcome back,{" "}
             <span className="relative inline-block text-lime-300">
-              {user?.name || "User"}
+              {user?.name || "Trainer"}
               <span className="absolute -bottom-1 left-0 h-[6px] w-full bg-lime-300" />
             </span>
           </h1>
           <p className="mt-2 text-sm text-white/40">
-            Here's a summary of your fitness journey
+            Here's an overview of your classes and students
           </p>
         </div>
 
         {/* Stats Cards */}
         <div
-          className={`grid gap-6 md:grid-cols-2 transition-all duration-700 ease-out ${
+          className={`grid gap-6 md:grid-cols-2 lg:grid-cols-3 transition-all duration-700 ease-out ${
             mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
           style={{ transitionDelay: "100ms" }}
         >
-          {/* Total Bookings */}
+          {/* Total Classes */}
           <div className="group relative rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-lime-300/30 hover:bg-white/10 hover:scale-[1.02]">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm font-medium text-white/40">
-                  Total Bookings
+                  Total Classes
                 </p>
                 <p className="mt-2 text-3xl font-bold text-white">
-                  {totalBookings}
+                  {totalClasses}
                 </p>
                 <p className="mt-1 text-xs text-white/30">
-                  {totalBookings === 1 ? "Class" : "Classes"} registered
+                  {totalClasses === 1 ? "Class" : "Classes"} created
                 </p>
               </div>
               <div className="rounded-xl bg-lime-300/10 p-3 text-lime-300">
-                <FiCalendar className="h-6 w-6" />
+                <FiBookOpen className="h-6 w-6" />
               </div>
             </div>
             <div className="mt-4 h-1 w-full rounded-full bg-white/5">
               <div
                 className="h-1 rounded-full bg-lime-300 transition-all duration-500"
-                style={{ width: `${Math.min(totalBookings * 10, 100)}%` }}
+                style={{ width: `${Math.min(totalClasses * 10, 100)}%` }}
               />
             </div>
           </div>
 
-          {/* Total Favorites */}
+          {/* Total Students */}
           <div className="group relative rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-lime-300/30 hover:bg-white/10 hover:scale-[1.02]">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm font-medium text-white/40">
-                  Total Favorites
+                  Total Students
                 </p>
                 <p className="mt-2 text-3xl font-bold text-white">
-                  {totalFavorites}
+                  {uniqueStudentCount}
                 </p>
                 <p className="mt-1 text-xs text-white/30">
-                  {totalFavorites === 1 ? "Class" : "Classes"} saved
+                  {uniqueStudentCount === 1 ? "Student" : "Students"} enrolled
                 </p>
               </div>
-              <div className="rounded-xl bg-pink-500/10 p-3 text-pink-400">
-                <FiHeart className="h-6 w-6" />
+              <div className="rounded-xl bg-blue-500/10 p-3 text-blue-400">
+                <FiUsers className="h-6 w-6" />
               </div>
             </div>
             <div className="mt-4 h-1 w-full rounded-full bg-white/5">
               <div
-                className="h-1 rounded-full bg-pink-400 transition-all duration-500"
-                style={{ width: `${Math.min(totalFavorites * 10, 100)}%` }}
+                className="h-1 rounded-full bg-blue-400 transition-all duration-500"
+                style={{ width: `${Math.min(uniqueStudentCount * 10, 100)}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Total Enrollments */}
+          <div className="group relative rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-lime-300/30 hover:bg-white/10 hover:scale-[1.02]">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-sm font-medium text-white/40">
+                  Total Enrollments
+                </p>
+                <p className="mt-2 text-3xl font-bold text-white">
+                  {totalStudents}
+                </p>
+                <p className="mt-1 text-xs text-white/30">
+                  {totalStudents === 1 ? "Enrollment" : "Enrollments"} total
+                </p>
+              </div>
+              <div className="rounded-xl bg-purple-500/10 p-3 text-purple-400">
+                <FiTrendingUp className="h-6 w-6" />
+              </div>
+            </div>
+            <div className="mt-4 h-1 w-full rounded-full bg-white/5">
+              <div
+                className="h-1 rounded-full bg-purple-400 transition-all duration-500"
+                style={{ width: `${Math.min(totalStudents * 10, 100)}%` }}
               />
             </div>
           </div>
         </div>
 
-        {/* Profile & Application Section */}
+        {/* Profile Section */}
         <div
           className={`mt-8 grid gap-6 lg:grid-cols-2 transition-all duration-700 ease-out ${
             mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
@@ -203,7 +198,7 @@ const OverviewClient = ({
                     {user?.name || "Unknown User"}
                   </h3>
                   <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border bg-lime-300/20 text-lime-300 border-lime-300/30">
-                    {user?.role || "member"}
+                    {user?.role || "trainer"}
                   </span>
                 </div>
                 <p className="text-sm text-white/40 flex items-center gap-1 mt-1">
@@ -216,99 +211,49 @@ const OverviewClient = ({
               </div>
             </div>
 
-            {/* Plan Badge */}
-            <div className="mt-4 flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-              <FiStar className="h-4 w-4 text-lime-300" />
-              <span className="text-sm font-medium text-white/60">
-                Current Plan:{" "}
-                <span className="font-bold text-white uppercase">
-                  {user?.plan || "Free"}
+            {/* Trainer Badge & Stats */}
+            <div className="mt-4 grid grid-cols-2 gap-3">
+              <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+                <FiAward className="h-4 w-4 text-lime-300" />
+                <span className="text-sm font-medium text-white/60">
+                  Trainer
                 </span>
-              </span>
+              </div>
+              <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+                <FiBarChart2 className="h-4 w-4 text-lime-300" />
+                <span className="text-sm font-medium text-white/60">
+                  {totalClasses} Classes
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Trainer Application Status */}
+          {/* Quick Stats */}
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-lime-300/30 hover:bg-white/10">
             <h2 className="text-sm font-bold uppercase tracking-wider text-lime-300 mb-4">
-              Trainer Application
+              Quick Overview
             </h2>
 
-            {trainerApplication ? (
-              <div className="space-y-4">
-                {/* Status Badge */}
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium border ${getStatusColor(
-                      trainerApplication.status,
-                    )}`}
-                  >
-                    {getStatusIcon(trainerApplication.status)}
-                    <span className="uppercase">
-                      {trainerApplication.status || "Pending"}
-                    </span>
-                  </div>
-                  <span className="text-xs text-white/30">
-                    Applied on {formatDate(trainerApplication.appliedAt)}
-                  </span>
-                </div>
-
-                {/* Application Details */}
-                <div className="rounded-xl border border-white/10 bg-white/5 p-3 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-white/40">Specialty</span>
-                    <span className="text-sm font-medium text-white">
-                      {trainerApplication.specialty || "N/A"}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-white/40">Experience</span>
-                    <span className="text-sm font-medium text-white">
-                      {trainerApplication.experience || "0"} years
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-white/40">Bio</span>
-                    <span className="text-sm text-white/60 text-right max-w-[60%] line-clamp-2">
-                      {trainerApplication.bio || "N/A"}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Admin Feedback (if rejected) */}
-               
-
-                {trainerApplication.status === "pending" && (
-                  <div className="rounded-xl border border-yellow-500/30 bg-yellow-500/10 p-3">
-                    <div className="flex items-center gap-2">
-                      <FiClock className="h-4 w-4 text-yellow-400" />
-                      <p className="text-sm text-yellow-400">
-                        Your application is being reviewed by admins
-                      </p>
-                    </div>
-                  </div>
-                )}
-{/* 
-                {trainerApplication.status === "approved" && (
-                  <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-3">
-                    <div className="flex items-center gap-2">
-                      <FiCheckCircle className="h-4 w-4 text-green-400" />
-                      <p className="text-sm text-green-400">
-                        Congratulations! You are now a trainer
-                      </p>
-                    </div>
-                  </div>
-                )} */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <span className="text-sm text-white/60">Classes Created</span>
+                <span className="text-lg font-bold text-white">{totalClasses}</span>
               </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center py-8 text-center">
-                <FiAward className="h-12 w-12 text-white/20 mb-3" />
-                <p className="text-white/40">No application found</p>
-                <p className="text-sm text-white/20 mt-1">
-                  Apply to become a trainer and share your expertise
-                </p>
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <span className="text-sm text-white/60">Students Enrolled</span>
+                <span className="text-lg font-bold text-white">{uniqueStudentCount}</span>
               </div>
-            )}
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <span className="text-sm text-white/60">Total Enrollments</span>
+                <span className="text-lg font-bold text-white">{totalStudents}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-white/60">Plan</span>
+                <span className="text-sm font-bold uppercase text-lime-300">
+                  {user?.plan || "Free"}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -316,4 +261,4 @@ const OverviewClient = ({
   );
 };
 
-export default OverviewClient;
+export default TrainerOverviewClient;

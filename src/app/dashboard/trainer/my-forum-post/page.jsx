@@ -13,7 +13,7 @@ const page = async () => {
   //console.log(posts)
 
   return (
-    <div>
+    <div >
       <MyForumPosts initialPosts={userPost} />
     </div>
   );

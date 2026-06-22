@@ -7,6 +7,7 @@ import CommunityCard from "../components/CommunityCard";
 
 const communityForumPage = async () => {
   const posts = await getCommunity();
+  //console.log(posts)
   const postsArray = Array.isArray(posts) ? posts : [posts];
 
   return (
@@ -21,7 +22,7 @@ const communityForumPage = async () => {
         
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 p-10">
+      <div className="grid gap-6 lg:grid-cols-3 md:grid-cols-2 p-10">
         {postsArray.map((post) => (
           <CommunityCard key={post._id} post={post} />
         ))}

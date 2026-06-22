@@ -1,18 +1,14 @@
-import ClassApplicationsClient from '@/app/components/ClassApplicationsClient';
-import { getAllClass } from '@/lib/api/allClass';
-import React from 'react';
-
+import { getAppliedTrainer } from "@/lib/api/trainer";
+import React from "react";
+import TrainerApplicationsClient from "../../TrainerApplicationsClient";
+import { getUserSession } from "@/lib/core/session";
+import { getUser } from "@/lib/api/user";
 
 const page = async () => {
-  const classApplications = await getAllClass();
-  // Filter only pending applications
-  const pendingApplications = classApplications?.filter(
-    (app) => app.status === 'pending'
-  ) || [];
-
+  const applications = await getAppliedTrainer()
   return (
     <div className="p-6">
-      <ClassApplicationsClient applications={pendingApplications} />
+      <TrainerApplicationsClient applications={applications}  />
     </div>
   );
 };
