@@ -1,12 +1,16 @@
 "use server";
 
+import { getTokenServer } from "../core/getTokenServer";
+
 const baseUrl = process.env.BASE_URL;
 
 export const createCommunityComment = async (postId, commentData) => {
+  
   const res = await fetch(`${baseUrl}/api/community-forum/${postId}/comment` , {
     method: 'POST' ,
     headers: {
-      'content-type' : 'application/json'
+      'content-type' : 'application/json',
+     
     },
     body: JSON.stringify(commentData)
   })
@@ -15,10 +19,12 @@ export const createCommunityComment = async (postId, commentData) => {
 
 
 export const createCommunity = async (data) => {
+  const token = await getTokenServer()
   const res = await fetch(`${baseUrl}/api/community-forum`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
+       authorization: `Bearer ${token}`
     },
     body: JSON.stringify(data),
   });

@@ -1,11 +1,20 @@
 "use server";
+
+import { getTokenServer } from "../core/getTokenServer";
+
+
+
 const baseURL = process.env.BASE_URL;
 
+
+
 export const updateUserRole = async (data,postId) => {
+  const token = await getTokenServer()
    const res = await fetch(`${baseURL}/api/manage-user/${postId}` , {
     method: "PATCH" ,
     headers: {
-      'content-type' : 'application/json'
+      'content-type' : 'application/json',
+      authorization: `Bearer ${token}`
     },
     body: JSON.stringify(data)
    })

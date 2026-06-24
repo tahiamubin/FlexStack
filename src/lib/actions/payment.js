@@ -1,8 +1,14 @@
 "use server";
-const baseUrl = process.env.BASE_URL;
+
+import { getTokenServer } from "../core/getTokenServer";
+
+const baseURL = process.env.BASE_URL;
 
 export const payment = async (data) => {
-  const res = await fetch(`${baseUrl}/api/payment`, {
+  //   console.log("BASE_URL:", baseURL);
+  // console.log("Sending data:", data);
+
+  const res = await fetch(`${baseURL}/api/payment`, {
     method: "POST",
     headers: {
       "content-type": "application/json",

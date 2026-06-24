@@ -14,19 +14,16 @@ import {
   Select,
   TextField,
 } from "@heroui/react";
-import { redirect } from "next/navigation";
-import { useRouter } from "next/router";
+
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-// import { redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 import { FcGoogle } from "react-icons/fc";
 import { HiSparkles } from "react-icons/hi2";
 
-
 export default function SignUpPage() {
-    const [mounted, setMounted] = useState(false);
-    const router = useRouter();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -38,13 +35,16 @@ export default function SignUpPage() {
 
     await authClient.signUp.email({
       ...user,
-      plan: 'free',
+      plan: "free",
     });
 
-    // redirect('/')
-     router.push("/");
+    redirect("/");
   };
-  
+  const handleGoogle = async () => {
+    await authClient.signIn.social({
+      provider: "google"
+    });
+  };
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-black">
@@ -67,7 +67,9 @@ export default function SignUpPage() {
           <div className="mb-10 text-center">
             <div
               className={`mb-5 flex items-center justify-center gap-2 transition-all duration-700 ease-out ${
-                mounted ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+                mounted
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-6 opacity-0"
               }`}
             >
               <HiSparkles className="h-4 w-4 text-lime-300" />
@@ -78,7 +80,9 @@ export default function SignUpPage() {
 
             <h1
               className={`text-4xl font-bold uppercase italic leading-[1.1] tracking-tight text-white transition-all duration-700 ease-out ${
-                mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                mounted
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
               }`}
               style={{ transitionDelay: "100ms" }}
             >
@@ -87,7 +91,9 @@ export default function SignUpPage() {
 
             <p
               className={`mt-4 text-base font-medium text-white/60 transition-all duration-700 ease-out ${
-                mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                mounted
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
               }`}
               style={{ transitionDelay: "200ms" }}
             >
@@ -156,11 +162,19 @@ export default function SignUpPage() {
                     </Select.Trigger>
                     <Select.Popover className="bg-black border border-white/10 rounded-2xl">
                       <ListBox>
-                        <ListBox.Item id="trainer" textValue="buyer" className="text-white hover:bg-lime-300/10">
+                        <ListBox.Item
+                          id="trainer"
+                          textValue="buyer"
+                          className="text-white hover:bg-lime-300/10"
+                        >
                           Trainer
                           <ListBox.ItemIndicator />
                         </ListBox.Item>
-                        <ListBox.Item id="member" textValue="seller" className="text-white hover:bg-lime-300/10">
+                        <ListBox.Item
+                          id="member"
+                          textValue="seller"
+                          className="text-white hover:bg-lime-300/10"
+                        >
                           Member
                           <ListBox.ItemIndicator />
                         </ListBox.Item>
@@ -187,6 +201,7 @@ export default function SignUpPage() {
                   </div>
 
                   <Button
+                    onClick={handleGoogle}
                     type="button"
                     className="w-full h-12 bg-white text-black font-medium rounded-2xl transition-all duration-300 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
                   >

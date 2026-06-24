@@ -14,10 +14,12 @@ import {
 
 const LatestClasses = async () => {
   const classes = await getLatestClasses();
-  console.log(classes)
+ //console.log(classes?.map(c => c.status))
 
   // Filter only approved classes
-  const approvedClasses = classes?.filter((cls) => cls.status === "approved") || [];
+  const approvedClasses = classes
+    ?.filter((cls) => cls.status === "approved")
+    .slice(0, 3) || [];
 
   const getDifficultyColor = (difficulty) => {
     if (!difficulty) return "text-white/40 bg-white/5 border-white/10";

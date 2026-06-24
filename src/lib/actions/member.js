@@ -1,11 +1,16 @@
 "use server";
+
+import { getTokenServer } from "../core/getTokenServer";
+
 const baseUrl = process.env.BASE_URL;
 
 export const createFavorite = async (data) => {
+  const token = await getTokenServer()
   const res = await fetch(`${baseUrl}/api/favorite`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
+       authorization: `Bearer ${token}`
     },
     body: JSON.stringify(data),
   });
@@ -19,10 +24,12 @@ export const createFavorite = async (data) => {
 };
 
 export const createApplyTrainer = async (data) => {
+  const token = await getTokenServer()
   const res = await fetch(`${baseUrl}/api/apply-trainer`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      authorization: `Bearer ${token}`
     },
     body: JSON.stringify(data),
   });

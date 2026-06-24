@@ -1,25 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@heroui/react";
 import toast from "react-hot-toast";
-import { 
-  FiCalendar, 
-  FiMail, 
-  FiShield, 
-  FiShieldOff, 
-  FiUser, 
-  FiUserPlus 
+import {
+  FiCalendar,
+  FiMail,
+  FiShield,
+  FiShieldOff,
+  FiUser,
+  FiUserPlus,
 } from "react-icons/fi";
-import { editRole, updateUserRole } from "@/lib/api/user";
+import { updateUserRole } from "@/lib/api/user";
+
 
 const ManageUser = ({ users }) => {
-  const [allUsers, setAllUsers] = useState(users);
+  const router = useRouter();
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
+    return new Date(dateString).toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
@@ -35,35 +35,40 @@ const ManageUser = ({ users }) => {
     return colors[role] || "bg-white/5 text-white/40 border-white/10";
   };
 
-  const getStatusBadge = (isBlocked) => {
-    return isBlocked
+  const getStatusBadge = (isBlocked) =>
+    isBlocked
       ? "bg-red-500/20 text-red-400 border-red-500/30"
       : "bg-green-500/20 text-green-400 border-green-500/30";
-  };
 
   const handleAction = async (user, action) => {
     try {
       if (action === "block") {
-        await updateUserRole({role: "member"} , user._id)
+        await updateUserRole(
+          { role: "member", isBlocked: true, roleBeforeBlock: user?.role },
+          user._id
+        );
         toast.success(`${user.name} has been blocked.`);
       } else if (action === "unblock") {
-        setAllUsers(prev =>
-          prev.map(u =>
-            u._id === user._id ? { ...u, isBlocked: false } : u
-          )
+        await updateUserRole(
+          { role: user.roleBeforeBlock || "member", isBlocked: false, roleBeforeBlock: null },
+          user._id
         );
         toast.success(`${user.name} has been unblocked.`);
       } else if (action === "makeAdmin") {
-        await updateUserRole({role: "admin"} , user._id)
+        await updateUserRole(
+          { role: "admin", isBlocked: false, roleBeforeBlock: null },
+          user._id
+        );
         toast.success(`${user.name} is now an Admin.`);
       }
+      router.refresh(); // re-fetches the server component, gets fresh `users`
     } catch (error) {
+      console.error(error);
       toast.error("Action failed.");
     }
-   
   };
 
-  if (allUsers.length === 0) {
+  if (users.length === 0) {
     return (
       <div className="flex h-64 flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5">
         <FiUser className="h-12 w-12 text-white/20 mb-3" />
@@ -75,22 +80,18 @@ const ManageUser = ({ users }) => {
   return (
     <div className="relative w-full overflow-hidden bg-black">
       <div className="mx-auto max-w-6xl px-6 py-10">
-        {/* Header */}
         <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
           <div>
             <h1 className="text-2xl font-bold uppercase italic text-white">
               Manage Users
             </h1>
-            <p className="text-sm text-white/40 mt-1">
-              Manage all platform users
-            </p>
+            <p className="text-sm text-white/40 mt-1">Manage all platform users</p>
           </div>
           <span className="text-xs font-medium uppercase tracking-wider text-lime-300 bg-lime-300/10 px-3 py-1 rounded-full border border-lime-300/20">
-            {allUsers.length} Users
+            {users.length} Users
           </span>
         </div>
 
-        {/* Table */}
         <div className="overflow-x-auto rounded-2xl border border-white/10 bg-white/5">
           <table className="w-full">
             <thead className="border-b border-white/10 bg-white/5">
@@ -104,7 +105,7 @@ const ManageUser = ({ users }) => {
               </tr>
             </thead>
             <tbody>
-              {allUsers.map((user) => (
+              {users.map((user) => (
                 <tr key={user._id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">

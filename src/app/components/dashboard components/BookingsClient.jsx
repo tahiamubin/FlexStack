@@ -125,7 +125,7 @@ const BookingsClient = ({ bookings }) => {
                     </span>
                   </td>
                   <td className="px-4 py-4 text-right">
-                    <Link href={`/dashboard/member/allclasses/${booking._id}`}>
+                    <Link href={`/dashboard/member/bookings/${booking._id}`}>
                       <Button
                         size="sm"
                         variant="ghost"

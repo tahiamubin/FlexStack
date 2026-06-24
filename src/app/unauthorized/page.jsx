@@ -1,86 +1,104 @@
 import { Button } from "@heroui/react";
 import Link from "next/link";
+import { FiLock, FiArrowLeft, FiHome } from "react-icons/fi";
+import { HiSparkles } from "react-icons/hi2";
 
 export default function UnauthorizedPage() {
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-6">
-      <div className="max-w-md w-full text-center">
-        {/* Lock icon */}
-        <div className="flex items-center justify-center mb-8">
-          <div className="w-20 h-20 rounded-2xl bg-red-50 flex items-center justify-center">
-            <svg
-              className="w-10 h-10 text-red-500"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={1.5}
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-              />
-            </svg>
+    <section className="relative w-full min-h-screen overflow-hidden bg-black">
+      {/* Background decoration */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, #84cc16 1px, transparent 1px)`,
+          backgroundSize: "40px 40px",
+        }}
+      />
+
+      {/* Gradient accents */}
+      <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-lime-300/5 blur-3xl" />
+      <div className="absolute -right-40 bottom-20 h-[500px] w-[500px] rounded-full bg-lime-300/5 blur-3xl" />
+
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-6 py-16 sm:px-10 lg:px-16">
+        <div className="w-full max-w-md">
+          {/* Lock Icon */}
+          <div className="flex justify-center mb-8">
+            <div className="flex h-24 w-24 items-center justify-center rounded-full bg-red-500/10">
+              <FiLock className="h-12 w-12 text-red-400" />
+            </div>
           </div>
-        </div>
 
-        {/* Error code */}
-        <p className="text-sm font-medium tracking-widest text-red-500 uppercase mb-3">
-          Error 401
-        </p>
+          {/* Error code */}
+          <div className="mb-5 flex items-center justify-center gap-2">
+            <HiSparkles className="h-4 w-4 text-lime-300" />
+            <span className="text-xs font-bold uppercase tracking-[0.3em] text-red-400">
+              Error 401
+            </span>
+          </div>
 
-        {/* Heading */}
-        <h1 className="text-3xl font-semibold text-gray-900 mb-4">
-          Unauthorized Access
-        </h1>
+          {/* Heading */}
+          <h1 className="text-4xl font-bold uppercase italic leading-[1.1] tracking-tight text-white text-center">
+            Unauthorized{" "}
+            <span className="relative font-bold inline-block text-lime-300 not-italic">
+              Access
+              <span className="absolute -bottom-1 left-0 h-[6px] w-full bg-lime-300" />
+            </span>
+          </h1>
 
-        {/* Description */}
-        <p className="text-base text-gray-500 leading-relaxed mb-10">
-          You don't have permission to view this page. Please sign in with an
-          authorized account or contact your administrator.
-        </p>
+          {/* Description */}
+          <p className="mt-6 text-center text-base font-medium text-white/60 leading-relaxed">
+            You don't have permission to view this page. Please sign in with an
+            authorized account or contact your administrator.
+          </p>
 
-        {/* Divider */}
-        <div className="w-12 h-px bg-gray-200 mx-auto mb-10" />
+          {/* Divider */}
+          <div className="my-10 flex items-center gap-4">
+            <div className="flex-1 border-t border-white/10" />
+            <span className="text-xs font-medium uppercase tracking-wider text-white/30">
+              Access Denied
+            </span>
+            <div className="flex-1 border-t border-white/10" />
+          </div>
 
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Link href={'/signin'}>
-            <Button
-              color="danger"
-              radius="sm"
-              size="md"
-              className="w-full sm:w-auto px-6 font-medium"
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link href="/signin" className="w-full sm:w-auto">
+              <Button
+                className="w-full bg-lime-300 text-black font-bold uppercase tracking-wide transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(132,204,22,0.3)] active:scale-95"
+                radius="full"
+                size="lg"
+                startContent={<FiLock className="h-4 w-4" />}
+              >
+                Sign In
+              </Button>
+            </Link>
+
+            <Link href="/" className="w-full sm:w-auto">
+              <Button
+                variant="bordered"
+                className="w-full border-white/20 text-white/60 hover:border-white/40 hover:text-white hover:bg-white/5 transition-all duration-300"
+                radius="full"
+                size="lg"
+                startContent={<FiHome className="h-4 w-4" />}
+              >
+                Go Home
+              </Button>
+            </Link>
+          </div>
+
+          {/* Footer note */}
+          <p className="mt-10 text-center text-xs text-white/30">
+            If you believe this is a mistake,{" "}
+            <a
+              href="#"
+              className="text-lime-300 hover:text-lime-200 transition-colors underline underline-offset-2"
             >
-              Sign In
-            </Button>
-          </Link>
-
-          <Link href={"/"}>
-            <Button
-              variant="bordered"
-              radius="sm"
-              size="md"
-              className="w-full sm:w-auto px-6 font-medium text-gray-600 border-gray-200 hover:bg-gray-50"
-            >
-              Go Back
-            </Button>
-          </Link>
+              contact support
+            </a>
+            .
+          </p>
         </div>
-
-        {/* Footer note */}
-        <p className="mt-10 text-xs text-gray-400">
-          If you believe this is a mistake,{" "}
-          <a
-            href="#"
-            className="text-gray-500 underline underline-offset-2 hover:text-gray-700 transition-colors"
-          >
-            contact support
-          </a>
-          .
-        </p>
       </div>
-    </div>
+    </section>
   );
 }

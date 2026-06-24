@@ -15,12 +15,6 @@ import {
   FiXCircle,
 } from "react-icons/fi";
 
-// Adjust this to match your actual API route for updating a trainer
-// application. It should accept a PATCH request with a JSON body of
-// { status: "approved" | "rejected", feedback } and, on the server:
-//   - on "approved": flip the related user's role to "trainer"
-//   - on "rejected": keep the user's role as "user", save the feedback,
-//     and set the application's status to "rejected"
 const updateApplicationStatus = async (applicationId, payload) => {
   const res = await fetch(`/api/admin/trainer-applications/${applicationId}`, {
     method: "PATCH",
@@ -46,7 +40,7 @@ const formatDate = (dateString) => {
 };
 
 const TrainerApplicationsClient = ({ applications }) => {
-  //console.log(applicant)
+  console.log(applications)
   const [allApplications, setAllApplications] = useState(applications);
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [feedback, setFeedback] = useState("");

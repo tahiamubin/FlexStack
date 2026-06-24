@@ -8,7 +8,7 @@ const page = async () => {
   const user = await getUserSession();
   const userId = user?.id;
   const bookings = await getBookingsById(userId);
-  //console.log(bookings)
+  //console.log(userId)
 
   return (
     <div className="p-6">

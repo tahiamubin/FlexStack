@@ -13,7 +13,7 @@ export async function POST(request) {
     const user = userSession?.user;
     //console.log(user)
 
-    const formData = await request.formData(); // formData() is async, needs await
+    const formData = await request.formData(); 
     const price = formData.get("price");
     const className = formData.get("className");
     const classId = formData.get("classId");
