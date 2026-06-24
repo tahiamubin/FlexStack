@@ -1,15 +1,13 @@
-
-
 import { getAllClass } from "@/lib/api/allClass";
 import ClassCard from "../components/ClassCard";
-import Pagination from "../components/dashboard components/PaginationClass";
-import PaginationClass from "../components/dashboard components/PaginationClass";
 
-const allClassPage = async () => {
+import SearchProduct from "../components/SearchProduct";
+
+const allClassPage = async ({searchParams}) => {
+  const {search} = await searchParams
   //const params = await searchParams;
-  const classes = await getAllClass();
+  const classes = await getAllClass(search);
   //console.log(classes)
-  
 
   // Filter only approved classes
   const approvedClasses =
@@ -35,6 +33,8 @@ const allClassPage = async () => {
           <div className="h-0.5 w-full bg-lime-300/30 mt-2 rounded-full" />
         </div>
       </div>
+      
+      <SearchProduct></SearchProduct>
 
       {/* Classes Grid */}
       {approvedClasses.length > 0 ? (
@@ -48,7 +48,6 @@ const allClassPage = async () => {
           <p className="text-white/40">No approved classes available</p>
         </div>
       )}
-     
     </div>
   );
 };

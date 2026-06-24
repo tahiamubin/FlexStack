@@ -1,11 +1,12 @@
 "use server";
 
 import { getToken } from "../api/token";
+const baseUrl = process.env.BASE_URL
 
 export const createClass = async (data) => {
     const token = await getToken()
    
-    const res = await fetch("http://localhost:5000/api/all-class" , {
+    const res = await fetch(`${baseUrl}/api/all-class` , {
         method: 'POST', 
         headers: {
             'content-type' : 'application/json',

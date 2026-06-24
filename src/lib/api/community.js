@@ -1,6 +1,6 @@
 "use server";
 
-import { headers } from "next/headers";
+
 import { getTokenServer } from "../core/getTokenServer";
 
 const baseURL = process.env.BASE_URL;

@@ -65,7 +65,7 @@ export const deleteClass = async (postId) => {
   return res.json();
 };
 
-export const getAllClass = async () => {
-  const res = await fetch(`${baseURL}/api/all-class`);
+export const getAllClass = async (search) => {
+  const res = await fetch(`${baseURL}/api/all-class?search=${search}`);
   return res.json();
 };
