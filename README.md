@@ -1,36 +1,219 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
 
-## Getting Started
+# 💪 FlexStack
 
-First, run the development server:
+### Fitness & Gym Management Platform
+
+**A full-stack, role-based fitness platform to manage classes, trainers, members, and community — all in one place.**
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen?style=for-the-badge)](https://flexstack.vercel.app/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-FlexStack-181717?style=for-the-badge&logo=github)](https://github.com/tahiamubin/FlexStack)
+
+</div>
+
+---
+
+## 📖 About
+
+FlexStack is a full-stack Fitness & Gym Management Platform where members can discover and book classes, trainers can create and manage content, and admins have full control over users, trainers, and the platform. The app uses JWT-based authentication with role-based access control across three distinct user types.
+
+---
+
+## 🌐 Live Links
+
+| | Link |
+|---|---|
+| 🖥️ **Frontend (Vercel)** | [https://flexstack.vercel.app](https://flexstack.vercel.app/) |
+| 📦 **Backend Repo** | [FlexStack-server](https://github.com/tahiamubin/FlexStack) |
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+| Technology | Purpose |
+|---|---|
+| **Next.js** | React framework with App Router |
+| **Tailwind CSS** | Utility-first styling |
+| **HeroUI** | Component library |
+| **Gravity UI** | Additional UI components |
+| **React Icons** | Icon library |
+
+### Backend
+| Technology | Purpose |
+|---|---|
+| **Node.js** | Runtime environment |
+| **Express.js** | REST API framework |
+| **MongoDB** | NoSQL database |
+| **JWT / JWKS** | Authentication & authorization |
+
+---
+
+## ✨ Features by Role
+
+### 👤 Member (Regular User)
+- Register and log in securely
+- Browse and search all available fitness classes
+- Book classes directly from the platform
+- Apply to become a trainer
+- View community forum previews publicly; log in to read full posts, comment, and vote (like/dislike)
+
+### 🏋️ Trainer
+- Create and manage personal fitness classes
+- Post informative content on the Community Forum
+- Classes go through admin approval before being listed publicly
+
+### 🛡️ Admin
+- Manage all users — block accounts or promote users to Admin
+- Review, approve, or reject Trainer applications; demote existing trainers back to member
+- Manage all classes — approve, reject, or delete listings
+- Post content on the Community Forum
+
+---
+
+## 📸 Screenshots
+
+> *(Add screenshots of your homepage, dashboard, class listings, and admin panel here)*
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js v18+
+- npm or yarn
+- MongoDB Atlas URI
+- A running backend server
+
+### Frontend Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repository
+git clone https://github.com/tahiamubin/FlexStack.git
+cd FlexStack
+
+# Install dependencies
+npm install
+
+# Create your environment file
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Add the following to your `.env.local`:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```env
+NEXT_PUBLIC_API_URL=your_backend_api_url
+NEXTAUTH_SECRET=your_nextauth_secret
+NEXTAUTH_URL=http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Run the development server
+npm run dev
+```
 
-## Learn More
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-To learn more about Next.js, take a look at the following resources:
+### Backend Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Clone the backend repo
+git clone https://github.com/tahiamubin/FlexStack-server.git
+cd FlexStack-server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Install dependencies
+npm install
 
-## Deploy on Vercel
+# Create your environment file
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Add the following to your `.env`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+CLIENT_URL=http://localhost:3000
+```
+
+```bash
+# Start the server
+node index.js
+```
+
+---
+
+## 📁 Project Structure
+
+```
+FlexStack/
+├── public/
+│   └── images/           # Static assets
+├── src/
+│   ├── app/              # Next.js App Router pages
+│   ├── components/       # Reusable UI components
+│   └── ...
+├── next.config.mjs
+├── tailwind.config.js
+└── package.json
+```
+
+---
+
+## 🔐 Authentication
+
+FlexStack uses **JWT-based authentication** verified via a JWKS endpoint. Three roles are enforced both on the frontend (route protection) and backend (middleware):
+
+| Role | Access Level |
+|---|---|
+| `member` | Class browsing, booking, forum reading, applying to become a trainer |
+| `trainer` | Class management, community posting |
+| `admin` | Full platform control — users, trainers, classes, forum |
+
+---
+
+## 🗄️ Database Collections
+
+| Collection | Description |
+|---|---|
+| `user` | All registered users with roles and plan info |
+| `allClass` | Fitness class listings with approval status |
+| `community` | Forum posts and nested comments |
+| `applyTrainer` | Trainer application submissions |
+| `memberFavorite` | Members' saved/favorited classes |
+| `subscription` | Payment and subscription records |
+
+---
+
+## 📦 Key Dependencies
+
+```json
+{
+  "next": "latest",
+  "tailwindcss": "latest",
+  "@heroui/react": "latest",
+  "@gravity-ui/uikit": "latest",
+  "react-icons": "latest",
+  "express": "latest",
+  "mongodb": "latest",
+  "jose-cjs": "latest"
+}
+```
+
+---
+
+## 🙌 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change.
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+  Made with ❤️ by <a href="https://github.com/tahiamubin">tahiamubin</a>
+</div>

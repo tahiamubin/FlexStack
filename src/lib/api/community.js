@@ -37,8 +37,11 @@ export const getCommunityForumById = async (id) => {
   });
   return res.json();
 };
-export const getCommunity = async () => {
-  const res = await fetch(`${baseURL}/api/community-forum`);
+export const getCommunity = async ({page}) => {
+  if(!page){
+    page =1
+  }
+  const res = await fetch(`${baseURL}/api/community-forum?search=${page}`);
 
   return res.json();
 };

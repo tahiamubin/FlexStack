@@ -1,13 +1,13 @@
-
-
 import React from "react";
 
 import { getCommunity } from "@/lib/api/community";
 import CommunityCard from "../components/CommunityCard";
+import PaginationForum from "../components/PaginationForum";
 
-const communityForumPage = async () => {
-  const posts = await getCommunity();
-  //console.log(posts)
+const communityForumPage = async ({ searchParams }) => {
+  const params = await searchParams;
+  const posts = await getCommunity(params);
+  console.log(posts)
   const postsArray = Array.isArray(posts) ? posts : [posts];
 
   return (
@@ -17,9 +17,7 @@ const communityForumPage = async () => {
           <h1 className="text-2xl font-bold uppercase italic text-white">
             Community Forum
           </h1>
-          
         </div>
-        
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3 md:grid-cols-2 p-10">
@@ -27,6 +25,7 @@ const communityForumPage = async () => {
           <CommunityCard key={post._id} post={post} />
         ))}
       </div>
+      {/* <PaginationForum></PaginationForum> */}
     </div>
   );
 };
