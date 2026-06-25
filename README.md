@@ -6,7 +6,7 @@
 
 **A full-stack, role-based fitness platform to manage classes, trainers, members, and community — all in one place.**
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen?style=for-the-badge)](https://flexstack.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen?style=for-the-badge)](https://flexstack-client.vercel.app)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-FlexStack-181717?style=for-the-badge&logo=github)](https://github.com/tahiamubin/FlexStack)
 
 </div>
@@ -21,30 +21,32 @@ FlexStack is a full-stack Fitness & Gym Management Platform where members can di
 
 ## 🌐 Live Links
 
-| | Link |
-|---|---|
-| 🖥️ **Frontend (Vercel)** | [https://flexstack.vercel.app](https://flexstack.vercel.app/) |
-| 📦 **Backend Repo** | [FlexStack-server](https://github.com/tahiamubin/FlexStack) |
+|                          | Link                                                                       |
+| ------------------------ | -------------------------------------------------------------------------- |
+| 🖥️ **Frontend (Vercel)** | [https://flexstack-client.vercel.app](https://flexstack-client.vercel.app) |
+| 📦 **Backend Repo**      | [FlexStack-server](https://github.com/tahiamubin/FlexStack-Server)         |
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-| Technology | Purpose |
-|---|---|
-| **Next.js** | React framework with App Router |
-| **Tailwind CSS** | Utility-first styling |
-| **HeroUI** | Component library |
-| **Gravity UI** | Additional UI components |
-| **React Icons** | Icon library |
+
+| Technology       | Purpose                         |
+| ---------------- | ------------------------------- |
+| **Next.js**      | React framework with App Router |
+| **Tailwind CSS** | Utility-first styling           |
+| **HeroUI**       | Component library               |
+| **Gravity UI**   | Additional UI components        |
+| **React Icons**  | Icon library                    |
 
 ### Backend
-| Technology | Purpose |
-|---|---|
-| **Node.js** | Runtime environment |
-| **Express.js** | REST API framework |
-| **MongoDB** | NoSQL database |
+
+| Technology     | Purpose                        |
+| -------------- | ------------------------------ |
+| **Node.js**    | Runtime environment            |
+| **Express.js** | REST API framework             |
+| **MongoDB**    | NoSQL database                 |
 | **JWT / JWKS** | Authentication & authorization |
 
 ---
@@ -52,6 +54,7 @@ FlexStack is a full-stack Fitness & Gym Management Platform where members can di
 ## ✨ Features by Role
 
 ### 👤 Member (Regular User)
+
 - Register and log in securely
 - Browse and search all available fitness classes
 - Book classes directly from the platform
@@ -59,11 +62,13 @@ FlexStack is a full-stack Fitness & Gym Management Platform where members can di
 - View community forum previews publicly; log in to read full posts, comment, and vote (like/dislike)
 
 ### 🏋️ Trainer
+
 - Create and manage personal fitness classes
 - Post informative content on the Community Forum
 - Classes go through admin approval before being listed publicly
 
 ### 🛡️ Admin
+
 - Manage all users — block accounts or promote users to Admin
 - Review, approve, or reject Trainer applications; demote existing trainers back to member
 - Manage all classes — approve, reject, or delete listings
@@ -71,11 +76,7 @@ FlexStack is a full-stack Fitness & Gym Management Platform where members can di
 
 ---
 
-## 📸 Screenshots
 
-> *(Add screenshots of your homepage, dashboard, class listings, and admin panel here)*
-
----
 
 ## 🚀 Getting Started
 
@@ -164,24 +165,24 @@ FlexStack/
 
 FlexStack uses **JWT-based authentication** verified via a JWKS endpoint. Three roles are enforced both on the frontend (route protection) and backend (middleware):
 
-| Role | Access Level |
-|---|---|
-| `member` | Class browsing, booking, forum reading, applying to become a trainer |
-| `trainer` | Class management, community posting |
-| `admin` | Full platform control — users, trainers, classes, forum |
+| Role      | Access Level                                                         |
+| --------- | -------------------------------------------------------------------- |
+| `member`  | Class browsing, booking, forum reading, applying to become a trainer |
+| `trainer` | Class management, community posting                                  |
+| `admin`   | Full platform control — users, trainers, classes, forum              |
 
 ---
 
 ## 🗄️ Database Collections
 
-| Collection | Description |
-|---|---|
-| `user` | All registered users with roles and plan info |
-| `allClass` | Fitness class listings with approval status |
-| `community` | Forum posts and nested comments |
-| `applyTrainer` | Trainer application submissions |
-| `memberFavorite` | Members' saved/favorited classes |
-| `subscription` | Payment and subscription records |
+| Collection       | Description                                   |
+| ---------------- | --------------------------------------------- |
+| `user`           | All registered users with roles and plan info |
+| `allClass`       | Fitness class listings with approval status   |
+| `community`      | Forum posts and nested comments               |
+| `applyTrainer`   | Trainer application submissions               |
+| `memberFavorite` | Members' saved/favorited classes              |
+| `subscription`   | Payment and subscription records              |
 
 ---
 
