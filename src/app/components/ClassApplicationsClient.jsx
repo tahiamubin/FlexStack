@@ -90,7 +90,7 @@ const ClassApplicationsClient = ({ applications }) => {
     setIsProcessing(true);
     try {
      const approved = await editClass({status: "approved"}, id)
-      toast.success("Application accepted! User is now a Trainer."); // replace with toast
+      toast.success("Application accepted! User is now a Trainer."); 
       closeDetails();
     } catch {
       alert("Failed to accept application.");

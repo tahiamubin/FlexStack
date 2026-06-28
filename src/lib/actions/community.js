@@ -18,6 +18,7 @@ export const createCommunityComment = async (postId, commentData) => {
 }
 
 
+
 export const createCommunity = async (data) => {
   const token = await getTokenServer()
   const res = await fetch(`${baseUrl}/api/community-forum`, {

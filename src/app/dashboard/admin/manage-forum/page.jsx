@@ -1,6 +1,6 @@
 import ModerationClient from '@/app/components/dashboard components/ModerationClient';
 import { getCommunity } from '@/lib/api/community';
-import React from 'react';
+
 
 
 const page = async () => {

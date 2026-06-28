@@ -3,30 +3,22 @@
 import { Button } from "@heroui/react";
 import Link from "next/link";
 import { useState } from "react";
+import { Pagination } from "@heroui/react";
+
 import {
   FiCalendar,
   FiHeart,
   FiMessageCircle,
-  FiShare2,
   FiBookmark,
   FiChevronRight,
-  FiUser,
 } from "react-icons/fi";
 
-/**
- * CommunityCard — Display community posts
- *
- * Fields: title, role, date, description, image, read more
- * Theme: Black with lime accent
- */
 const CommunityCard = ({ post }) => {
-  
-  const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [likesCount, setLikesCount] = useState(
-    Math.floor(Math.random() * 50) + 5,
-  );
+  const [page, setPage] = useState(1);
+  const totalPages = 3;
+
   const [imageError, setImageError] = useState(false);
 
   // Format date
@@ -47,11 +39,6 @@ const CommunityCard = ({ post }) => {
       member: "text-white/60",
     };
     return roles[role] || roles.member;
-  };
-
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-    setLikesCount((prev) => (isLiked ? prev - 1 : prev + 1));
   };
 
   // Truncate description
@@ -132,20 +119,16 @@ const CommunityCard = ({ post }) => {
       {/* Actions */}
       <div className="mt-5 flex items-center gap-5 border-t border-white/10 pt-4">
         {/* Like Button */}
-        <button
-          onClick={handleLike}
-          className="flex items-center gap-1.5 text-sm text-white/40 transition-all duration-300 hover:scale-105 hover:text-lime-300"
-        >
+        <button className="flex items-center gap-1.5 text-sm text-white/40 transition-all duration-300 hover:scale-105 hover:text-lime-300">
+        {/* ${isLiked ? "fill-lime-300 text-lime-300" : ""} */}
           <FiHeart
-            className={`h-4.5 w-4.5 transition-all duration-300 ${isLiked ? "fill-lime-300 text-lime-300" : ""}`}
+            className={`h-4.5 w-4.5 transition-all duration-300 `}
           />
-          <span>{likesCount}</span>
         </button>
 
         {/* Comment Button */}
         <button className="flex items-center gap-1.5 text-sm text-white/40 transition-all duration-300 hover:scale-105 hover:text-lime-300">
           <FiMessageCircle className="h-4.5 w-4.5" />
-          <span>{Math.floor(Math.random() * 20) + 1}</span>
         </button>
 
         {/* read more Button */}
@@ -155,6 +138,8 @@ const CommunityCard = ({ post }) => {
           </Button>
         </Link>
       </div>
+
+    
     </div>
   );
 };

@@ -1,34 +1,39 @@
 'use client'
 import { Pagination } from "@heroui/react";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
-const PaginationForum = () => {
-  const [page, setPage] = useState(1);
-  const totalPages = 3;
+const PaginationForum = ({ totalPage, currentPage }) => {
+  const router = useRouter();
+
   return (
     <div>
       <Pagination className="justify-center">
         <Pagination.Content>
           <Pagination.Item>
             <Pagination.Previous
-              isDisabled={page === 1}
-              onPress={() => setPage((p) => p - 1)}
+              isDisabled={currentPage === 1}
+              onPress={() => router.push(`?page=${currentPage - 1}`)}
             >
               <Pagination.PreviousIcon />
               <span>Previous</span>
             </Pagination.Previous>
           </Pagination.Item>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+
+          {Array.from({ length: totalPage }, (_, i) => i + 1).map((p) => (
             <Pagination.Item key={p}>
-              <Pagination.Link isActive={p === page} onPress={() => setPage(p)}>
+              <Pagination.Link
+                isActive={p === currentPage}
+                onPress={() => router.push(`?page=${p}`)}
+              >
                 {p}
               </Pagination.Link>
             </Pagination.Item>
           ))}
+
           <Pagination.Item>
             <Pagination.Next
-              isDisabled={page === totalPages}
-              onPress={() => setPage((p) => p + 1)}
+              isDisabled={currentPage === totalPage}
+              onPress={() => router.push(`?page=${currentPage + 1}`)}
             >
               <span>Next</span>
               <Pagination.NextIcon />

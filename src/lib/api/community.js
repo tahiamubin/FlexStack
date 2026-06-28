@@ -1,6 +1,5 @@
 "use server";
 
-
 import { getTokenServer } from "../core/getTokenServer";
 
 const baseURL = process.env.BASE_URL;
@@ -37,11 +36,14 @@ export const getCommunityForumById = async (id) => {
   });
   return res.json();
 };
-export const getCommunity = async ({page}) => {
-  if(!page){
-    page =1
-  }
-  const res = await fetch(`${baseURL}/api/community-forum?search=${page}`);
 
-  return res.json();
+
+
+
+// admin --> manage community froum
+export const getCommunity = async (page = 1) => {
+  const res = await fetch(`${baseURL}/api/community-forum?page=${page}&limit=9`, {
+    cache: "no-store"
+  });
+  return res.json(); // returns { data, page, totalPage }
 };
