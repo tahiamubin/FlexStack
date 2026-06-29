@@ -56,7 +56,7 @@ const ManageUser = ({ users }) => {
         toast.success(`${user.name} has been unblocked.`);
       } else if (action === "makeAdmin") {
         await updateUserRole(
-          { role: "admin", isBlocked: false, roleBeforeBlock: null },
+          { role: "admin"} ,
           user._id
         );
         toast.success(`${user.name} is now an Admin.`);

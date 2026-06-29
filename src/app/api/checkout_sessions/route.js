@@ -20,6 +20,8 @@ export async function POST(request) {
 
     const schedule = formData.get("schedule");
 
+    
+
     const session = await stripe.checkout.sessions.create({
       customer_email: user?.email,
       line_items: [

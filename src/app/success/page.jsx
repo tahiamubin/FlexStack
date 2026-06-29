@@ -3,10 +3,19 @@ import { stripe } from "../../lib/stripe";
 import { payment } from "@/lib/actions/payment";
 import Link from "next/link";
 import { HiSparkles } from "react-icons/hi2";
-import { FiCheckCircle, FiArrowRight, FiMail, FiShoppingBag } from "react-icons/fi";
+import {
+  FiCheckCircle,
+  FiArrowRight,
+  FiMail,
+  FiShoppingBag,
+} from "react-icons/fi";
+import { getUserSession } from "@/lib/core/session";
+
 
 export default async function Success({ searchParams }) {
   const { session_id } = await searchParams;
+  const user = await getUserSession();
+  console.log(user);
 
   if (!session_id)
     throw new Error("Please provide a valid session_id (`cs_test_...`)");
@@ -24,7 +33,10 @@ export default async function Success({ searchParams }) {
   }
 
   if (status === "complete") {
-    await payment({ ...metadata, sessionId: session_id });
+    const result = await payment({ ...metadata, sessionId: session_id });
+    if (result?.error) {
+      return redirect("/");
+    }
 
     return (
       <section className="relative w-full min-h-screen overflow-hidden bg-black">

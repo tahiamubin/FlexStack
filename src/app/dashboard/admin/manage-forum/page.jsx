@@ -5,6 +5,7 @@ import { getCommunity } from '@/lib/api/community';
 
 const page = async () => {
   const forumPosts = await getCommunity();
+  //console.log(forumPosts)
   
   return (
     <div className="p-6">

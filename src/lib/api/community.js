@@ -45,5 +45,5 @@ export const getCommunity = async (page = 1) => {
   const res = await fetch(`${baseURL}/api/community-forum?page=${page}&limit=9`, {
     cache: "no-store"
   });
-  return res.json(); // returns { data, page, totalPage }
+  return res.json(); 
 };

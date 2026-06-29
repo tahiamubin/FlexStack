@@ -3,6 +3,7 @@ import CommunityCard from "../components/CommunityCard";
 import PaginationForum from "../components/PaginationForum";
 
 
+
 const CommunityForumPage = async ({ searchParams }) => {
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;

@@ -19,7 +19,9 @@ import {
 } from "react-icons/fi";
 
 const ModerationClient = ({ posts }) => {
-  const [allPosts, setAllPosts] = useState(posts);
+  //console.log(posts)
+  const allPosts = posts.data
+ 
   const [selectedPost, setSelectedPost] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -41,10 +43,8 @@ const ModerationClient = ({ posts }) => {
   const handleDeleteConfirm = async (id) => {
     setIsProcessing(true);
     try {
-      //await deletePost(selectedPost._id);
-      //setAllPosts((prev) => prev.filter((p) => p._id !== selectedPost._id));
       const post = await deleteForum(id);
-      //console.log(post.response)
+
       toast.success("Post deleted successfully!");
       setIsDeleteModalOpen(false);
     } catch (error) {
@@ -54,7 +54,7 @@ const ModerationClient = ({ posts }) => {
     }
   };
 
-  if (allPosts.length === 0) {
+  if (posts.length === 0) {
     return (
       <div className="flex h-64 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
         <p className="text-white/40">No posts to moderate</p>

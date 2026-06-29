@@ -15,6 +15,8 @@ import { Button } from "@heroui/react";
 import { HiSparkles } from "react-icons/hi2";
 
 const ClassDetailsClient = ({ classData }) => {
+  
+  //console.log(classData)
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -187,6 +189,7 @@ const ClassDetailsClient = ({ classData }) => {
             </div>
 
             {/* Buy Now Button */}
+            
             <div className="mt-6">
               <form action="/api/checkout_sessions" method="POST">
                 <input
