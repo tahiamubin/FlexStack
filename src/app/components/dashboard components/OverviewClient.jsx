@@ -26,7 +26,7 @@ const OverviewClient = ({
   const trainerApplication = Array.isArray(trainerApplicationRaw)
     ? trainerApplicationRaw[0]
     : trainerApplicationRaw;
-  console.log("from client", trainerApplication);
+  //console.log("from client", trainerApplication);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -216,16 +216,8 @@ const OverviewClient = ({
               </div>
             </div>
 
-            {/* Plan Badge */}
-            <div className="mt-4 flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-              <FiStar className="h-4 w-4 text-lime-300" />
-              <span className="text-sm font-medium text-white/60">
-                Current Plan:{" "}
-                <span className="font-bold text-white uppercase">
-                  {user?.plan || "Free"}
-                </span>
-              </span>
-            </div>
+          
+            
           </div>
 
           {/* Trainer Application Status */}

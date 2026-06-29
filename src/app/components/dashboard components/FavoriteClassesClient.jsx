@@ -13,11 +13,12 @@ import {
   FiTrash2,
 } from "react-icons/fi";
 import toast from "react-hot-toast";
+import { deleteSave } from "@/lib/api/member";
+import { Delete } from "lucide-react";
 
 const FavoriteClassesClient = ({ favorites = [] }) => {
-  console.log('fac' , favorites)
+  //console.log('fac' , favorites)
   const [allFavorites, setAllFavorites] = useState(favorites);
-  const [isRemoving, setIsRemoving] = useState(false);
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -40,19 +41,11 @@ const FavoriteClassesClient = ({ favorites = [] }) => {
     return colors[difficulty] || "text-white/40 bg-white/5 border-white/10";
   };
 
-  const handleRemoveFavorite = async (classId) => {
-    if (!classId) return;
-    setIsRemoving(true);
-    try {
-      // await removeFavorite(classId);
-      setAllFavorites((prev) =>
-        prev.filter((item) => item.classData?._id !== classId),
-      );
-      toast.success("Removed from favorites!");
-    } catch (error) {
-      toast.error("Failed to remove from favorites.");
-    } finally {
-      setIsRemoving(false);
+  const handleRemoveFavorite = async (favId) => {
+    //console.log(favId)
+    const remove = await deleteSave(favId);
+    if (remove) {
+      toast.success("Class has been removed from favorite!");
     }
   };
 
@@ -100,13 +93,6 @@ const FavoriteClassesClient = ({ favorites = [] }) => {
 
               <div className="relative">
                 {/* Remove Button */}
-                <button
-                  onClick={() => handleRemoveFavorite(classData._id)}
-                  disabled={isRemoving}
-                  className="absolute right-0 top-0 text-white/30 transition-all duration-300 hover:scale-110 hover:text-red-400 z-10"
-                >
-                  <FiTrash2 className="h-4 w-4" />
-                </button>
 
                 {/* Image */}
                 {classData.image && (
@@ -199,10 +185,13 @@ const FavoriteClassesClient = ({ favorites = [] }) => {
                 </div>
 
                 {/* Bookmark */}
-                <div className="mt-3 flex items-center border-t border-white/10 pt-3">
-                  <button className="flex items-center gap-2 text-lime-300 transition-all duration-300 hover:scale-110">
+                <div
+                 
+                  className="mt-3 flex items-center border-t border-white/10 pt-3"
+                >
+                  <button  onClick={() => handleRemoveFavorite(fav._id)} className="flex items-center gap-2 text-lime-300 transition-all duration-300 hover:scale-110">
                     <FiBookmark className="h-4 w-4 fill-lime-300 text-lime-300" />
-                    <span className="text-xs font-medium">Saved</span>
+                    <span className="text-xs font-medium">Remove</span>
                   </button>
                 </div>
               </div>

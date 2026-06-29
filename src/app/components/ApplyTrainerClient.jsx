@@ -23,7 +23,6 @@ import {
 } from "@heroui/react";
 import { createApplyTrainer } from "@/lib/actions/member";
 
-
 const ApplyTrainerClient = () => {
   const [mounted, setMounted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -67,8 +66,7 @@ const ApplyTrainerClient = () => {
         appliedAt: new Date().toISOString(),
       };
 
-      //console.log("Trainer Application Data:", applicationData);
-      await createApplyTrainer(applicationData)
+      await createApplyTrainer(applicationData);
 
       // await applyForTrainer(applicationData);
 

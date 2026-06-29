@@ -7,7 +7,7 @@ const page = async () => {
   const user = await getUserSession()
   const favPosts = await getFavoriteClass()
   const userPost = favPosts?.filter((post) => post.MemberId === user.id) || [];
- console.log('user post',userPost)
+ //console.log('user post',userPost)
   //console.log('fav',favPosts)
  // console.log('user',user)
   

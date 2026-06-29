@@ -1,21 +1,18 @@
-import { getBookingsById } from '@/lib/api/allClass';
-import React from 'react';
-import { HiSparkles } from 'react-icons/hi2';
+import { getBookingClassId} from "@/lib/api/allClass";
+import React from "react";
+import { HiSparkles } from "react-icons/hi2";
 import {
   FiCalendar,
-  FiClock,
   FiDollarSign,
-  FiUser,
   FiMail,
-  FiHash,
   FiCheckCircle,
-  FiPrinter,
-} from 'react-icons/fi';
+} from "react-icons/fi";
 
 const page = async ({ params }) => {
   const { id } = await params;
-  const details = await getBookingsById(id);
-  console.log(details)
+  //console.log(id)
+  const details = await getBookingClassId(id);
+  //onsole.log(details);
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -155,7 +152,8 @@ const page = async ({ params }) => {
               {/* Footer */}
               <div className="border-t border-white/10 pt-4 text-center">
                 <p className="text-xs text-white/30">
-                  Thank you for your booking! A confirmation email has been sent.
+                  Thank you for your booking! A confirmation email has been
+                  sent.
                 </p>
                 <p className="text-xs text-white/20 mt-1">
                   {formatDate(new Date())}

@@ -3,7 +3,6 @@
 import { Button } from "@heroui/react";
 import Link from "next/link";
 import { useState } from "react";
-import { Pagination } from "@heroui/react";
 
 import {
   FiCalendar,
@@ -14,10 +13,9 @@ import {
 } from "react-icons/fi";
 
 const CommunityCard = ({ post }) => {
-  const [isBookmarked, setIsBookmarked] = useState(false);
+
   const [isExpanded, setIsExpanded] = useState(false);
-  const [page, setPage] = useState(1);
-  const totalPages = 3;
+
 
   const [imageError, setImageError] = useState(false);
 
@@ -74,15 +72,7 @@ const CommunityCard = ({ post }) => {
           </div>
         </div>
 
-        {/* Bookmark Button */}
-        <button
-          onClick={() => setIsBookmarked(!isBookmarked)}
-          className="text-white/30 transition-all duration-300 hover:scale-110 hover:text-lime-300 ml-4 flex-shrink-0"
-        >
-          <FiBookmark
-            className={`h-5 w-5 transition-all duration-300 ${isBookmarked ? "fill-lime-300 text-lime-300" : ""}`}
-          />
-        </button>
+     
       </div>
 
       {/* Image */}
@@ -120,10 +110,8 @@ const CommunityCard = ({ post }) => {
       <div className="mt-5 flex items-center gap-5 border-t border-white/10 pt-4">
         {/* Like Button */}
         <button className="flex items-center gap-1.5 text-sm text-white/40 transition-all duration-300 hover:scale-105 hover:text-lime-300">
-        {/* ${isLiked ? "fill-lime-300 text-lime-300" : ""} */}
-          <FiHeart
-            className={`h-4.5 w-4.5 transition-all duration-300 `}
-          />
+          {/* ${isLiked ? "fill-lime-300 text-lime-300" : ""} */}
+          <FiHeart className={`h-4.5 w-4.5 transition-all duration-300 `} />
         </button>
 
         {/* Comment Button */}
@@ -138,8 +126,6 @@ const CommunityCard = ({ post }) => {
           </Button>
         </Link>
       </div>
-
-    
     </div>
   );
 };

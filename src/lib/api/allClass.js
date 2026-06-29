@@ -9,6 +9,17 @@ export const getLatestClasses = async () => {
   return res.json();
 };
 
+export const getBookingClassId = async (id) => {
+  const token = await getTokenServer();
+  const res = await fetch(`${baseURL}/api/payment-class/${id}`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+  return res.json();
+};
+
+
 export const getBookingsById = async (id) => {
   const token = await getTokenServer();
   const res = await fetch(`${baseURL}/api/payment/${id}`, {
@@ -53,13 +64,13 @@ export const editClass = async (data, postId) => {
 };
 
 export const deleteClass = async (postId) => {
-  const token = await getTokenServer();
-  console.log("post", postId);
+const token = await getTokenServer();
+  //console.log("post", postId);
   const res = await fetch(`${baseURL}/api/all-class/${postId}`, {
     method: "DELETE",
     headers: {
       "content-type": "application/json",
-      authorization: `Bearer ${token}`,
+      authorization: `Bearer ${token}`
     },
   });
   return res.json();

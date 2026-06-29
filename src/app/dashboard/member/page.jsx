@@ -7,8 +7,10 @@ import React from "react";
 const page = async () => {
   const user = await getUserSession();
   const userId = user?.id;
+  console.log(userId)
 
   const bookings = await getBookingsById(userId);
+  console.log('bookings',bookings)
   const favorites = await getFavoriteClass();
   const userPost = favorites?.filter((post) => post.MemberId === user.id) || [];
   const trainerApplication = await getApplication();
