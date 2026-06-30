@@ -6,7 +6,7 @@ import {
   FiUser,
   FiTag,
   FiEdit,
-  FiUsers,
+
   FiTrash2,
 } from "react-icons/fi";
 import toast from "react-hot-toast";
@@ -121,13 +121,7 @@ const MyClasses = ({ initialPosts }) => {
 
                 {/* Action Buttons */}
                 <div className="flex gap-2">
-                  <button
-                    onClick={() => handleViewStudents(post)}
-                    className="text-white/30 transition-all duration-300 hover:scale-110 hover:text-blue-400"
-                    title="View Students"
-                  >
-                    <FiUsers className="h-5 w-5" />
-                  </button>
+                  
                   <button
                     onClick={() => handleEditClick(post)}
                     className="text-white/30 transition-all duration-300 hover:scale-110 hover:text-lime-300"
@@ -181,10 +175,7 @@ const MyClasses = ({ initialPosts }) => {
                 </div>
               )}
 
-              {/* Actions */}
-              <div className="mt-6 flex items-center gap-6 border-t border-white/10 pt-4">
-                <CommunityLikes postId={post._id} />
-              </div>
+             
             </div>
           </div>
         ))}
@@ -228,11 +219,11 @@ const MyClasses = ({ initialPosts }) => {
    
 
       {/* Students Modal */}
-      <StudentsModal
+      {/* <StudentsModal
         isOpen={isStudentsModalOpen}
         onClose={() => setIsStudentsModalOpen(false)}
         post={selectedPost}
-      />
+      /> */}
     </div>
   );
 };
