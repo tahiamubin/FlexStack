@@ -1,5 +1,6 @@
 "use client";
 
+import { getEnrolledStudent } from "@/lib/api/trainer";
 import { useState, useEffect } from "react";
 import {
   FiBookOpen,
@@ -13,7 +14,7 @@ import {
 } from "react-icons/fi";
 import { HiSparkles } from "react-icons/hi2";
 
-const TrainerOverviewClient = ({ user, userClasses, allStudents }) => {
+const TrainerOverviewClient = ({ user, userClasses, allStudents, enrolled }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const TrainerOverviewClient = ({ user, userClasses, allStudents }) => {
   // Get unique students
   const uniqueStudents = [...new Set(allStudents?.map(s => s.userId))] || [];
   const uniqueStudentCount = uniqueStudents.length;
+ 
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-black">
@@ -79,7 +81,7 @@ const TrainerOverviewClient = ({ user, userClasses, allStudents }) => {
 
         {/* Stats Cards */}
         <div
-          className={`grid gap-6 md:grid-cols-2 lg:grid-cols-3 transition-all duration-700 ease-out ${
+          className={`grid gap-6 md:grid-cols-2  transition-all duration-700 ease-out ${
             mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
           style={{ transitionDelay: "100ms" }}
@@ -110,32 +112,7 @@ const TrainerOverviewClient = ({ user, userClasses, allStudents }) => {
             </div>
           </div>
 
-          {/* Total Students */}
-          <div className="group relative rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-lime-300/30 hover:bg-white/10 hover:scale-[1.02]">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-sm font-medium text-white/40">
-                  Total Students
-                </p>
-                <p className="mt-2 text-3xl font-bold text-white">
-                  {uniqueStudentCount}
-                </p>
-                <p className="mt-1 text-xs text-white/30">
-                  {uniqueStudentCount === 1 ? "Student" : "Students"} enrolled
-                </p>
-              </div>
-              <div className="rounded-xl bg-blue-500/10 p-3 text-blue-400">
-                <FiUsers className="h-6 w-6" />
-              </div>
-            </div>
-            <div className="mt-4 h-1 w-full rounded-full bg-white/5">
-              <div
-                className="h-1 rounded-full bg-blue-400 transition-all duration-500"
-                style={{ width: `${Math.min(uniqueStudentCount * 10, 100)}%` }}
-              />
-            </div>
-          </div>
-
+          
           {/* Total Enrollments */}
           <div className="group relative rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-lime-300/30 hover:bg-white/10 hover:scale-[1.02]">
             <div className="flex items-start justify-between">
@@ -144,7 +121,7 @@ const TrainerOverviewClient = ({ user, userClasses, allStudents }) => {
                   Total Enrollments
                 </p>
                 <p className="mt-2 text-3xl font-bold text-white">
-                  {totalStudents}
+                  {enrolled}
                 </p>
                 <p className="mt-1 text-xs text-white/30">
                   {totalStudents === 1 ? "Enrollment" : "Enrollments"} total

@@ -9,11 +9,11 @@ const page = async () => {
   const user = await getUserSession();
   const posts = await getCommunity();
   //console.log(user.id);
-  const userPost = posts?.filter((post) => post.userId === user.id) || [];
-  //console.log(posts)
+  const userPost = posts?.data.filter((post) => post.userId === user.id) || [];
+  //console.log(posts);
 
   return (
-    <div >
+    <div>
       <MyForumPosts initialPosts={userPost} />
     </div>
   );

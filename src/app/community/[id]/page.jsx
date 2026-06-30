@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   FiCalendar,
@@ -19,7 +18,6 @@ import CommunityLikes from "@/app/components/CommunityLikes";
 const CommunityPostDetails = async ({ params }) => {
   const { id } = await params;
   const post = await getCommunityForumById(id);
-  
 
   // Format date
   const formatDate = (dateString) => {
@@ -35,14 +33,14 @@ const CommunityPostDetails = async ({ params }) => {
   const getRoleBadge = (role) => {
     const roles = {
       trainer: "bg-lime-300/20 text-lime-300 border-lime-300/30",
-     
       admin: "bg-purple-300/20 text-purple-300 border-purple-300/30",
+      member: "bg-blue-300/20 text-blue-300 border-blue-300/30",
     };
     return roles[role] || roles.member;
   };
-   
-  console.log(post._id)
 
+  // Get comment count (assuming post has comments array or count)
+  const commentCount = post.comments?.length || 0;
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -64,7 +62,6 @@ const CommunityPostDetails = async ({ params }) => {
               <FiUser className="h-7 w-7" />
             </div>
             <div>
-              
               <div className="flex items-center gap-3 mt-1">
                 <span
                   className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${getRoleBadge(post.userRole)}`}
@@ -125,33 +122,30 @@ const CommunityPostDetails = async ({ params }) => {
           </div>
         )}
 
-        {/* Stats & Actions */}
-        <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-6">
-          <div className="flex items-center gap-8">
-            {/* Likes */}
+        {/* Stats & Actions - Fixed Alignment */}
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6">
+          <div className="flex flex-wrap items-center gap-6">
+            {/* Likes - Now properly aligned */}
             <div className="flex items-center gap-2 text-white/40">
-             <CommunityLikes postId = {post._id}></CommunityLikes>
+              <CommunityLikes postId={post._id} />
             </div>
-
-            {/* Comments */}
-            {/* <div className="flex items-center gap-2 text-white/40">
-              <FiMessageCircle className="h-5 w-5" />
-              <Comments postId = {post._id}></Comments> */}
-              {/* <span className="text-sm font-medium text-white/60">
-                {Math.floor(Math.random() * 20) + 1}
-              </span> */}
-
-            {/* </div> */}
-
-            {/* Share */}
-            <button className="flex items-center gap-2 text-white/40 transition-all duration-300 hover:text-lime-300">
-              <FiShare2 className="h-5 w-5" />
-              <span className="text-sm font-medium">Share</span>
-            </button>
           </div>
 
           {/* Post ID */}
-          <span className="text-xs text-white/20">Post ID: {post._id}</span>
+          <span className="text-xs text-white/20 whitespace-nowrap">
+            Post ID: {post._id}
+          </span>
+        </div>
+
+        {/* Comments Section - Full width with proper alignment */}
+        <div className="mt-8 border-t border-white/10 pt-6">
+          <div className="flex items-center gap-2 mb-4">
+            <FiMessageCircle className="h-5 w-5 text-lime-300" />
+            <h3 className="text-lg font-semibold text-white">
+              Comments ({commentCount})
+            </h3>
+          </div>
+          <Comments postId={post._id} />
         </div>
       </div>
     </div>
