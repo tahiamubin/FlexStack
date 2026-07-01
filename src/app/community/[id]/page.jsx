@@ -138,11 +138,12 @@ const CommunityPostDetails = async ({ params }) => {
         </div>
 
         {/* Comments Section - Full width with proper alignment */}
+
         <div className="mt-8 border-t border-white/10 pt-6">
           <div className="flex items-center gap-2 mb-4">
             <FiMessageCircle className="h-5 w-5 text-lime-300" />
             <h3 className="text-lg font-semibold text-white">
-              Comments ({commentCount})
+              Comments 
             </h3>
           </div>
           <Comments postId={post._id} />

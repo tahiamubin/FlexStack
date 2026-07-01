@@ -175,7 +175,7 @@ const MyClasses = ({ initialPosts }) => {
                 </div>
               )}
 
-             
+               
             </div>
           </div>
         ))}
