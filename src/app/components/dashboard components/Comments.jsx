@@ -20,7 +20,7 @@ const Comments = ({ postId }) => {
     const fetchComments = async () => {
       try {
         const data = await getCommunityComment(postId);
-        console.log("Fetched comments:", data);
+       // console.log("Fetched comments:", data);
         // The data is already an array of comments
         setComments(Array.isArray(data) ? data : []);
       } catch (error) {

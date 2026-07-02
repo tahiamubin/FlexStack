@@ -4,6 +4,8 @@ import { getTokenServer } from "../core/getTokenServer";
 
 const baseUrl = process.env.BASE_URL;
 
+
+
 export const createCommunityComment = async (postId, user, data) => {
   const res = await fetch(`${baseUrl}/api/community-forum/${postId}/comment`, {
     method: "POST",

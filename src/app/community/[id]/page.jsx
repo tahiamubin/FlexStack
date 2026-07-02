@@ -11,13 +11,14 @@ import {
   FiLink,
 } from "react-icons/fi";
 import Link from "next/link";
-import { getCommunityForumById } from "@/lib/api/community";
+import { getCommunityComment, getCommunityForumById } from "@/lib/api/community";
 import Comments from "@/app/components/dashboard components/Comments";
 import CommunityLikes from "@/app/components/CommunityLikes";
 
 const CommunityPostDetails = async ({ params }) => {
   const { id } = await params;
   const post = await getCommunityForumById(id);
+  const comments = await getCommunityComment(id)
 
   // Format date
   const formatDate = (dateString) => {
@@ -122,20 +123,8 @@ const CommunityPostDetails = async ({ params }) => {
           </div>
         )}
 
-        {/* Stats & Actions - Fixed Alignment */}
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6">
-          <div className="flex flex-wrap items-center gap-6">
-            {/* Likes - Now properly aligned */}
-            <div className="flex items-center gap-2 text-white/40">
-              <CommunityLikes postId={post._id} />
-            </div>
-          </div>
-
-          {/* Post ID */}
-          <span className="text-xs text-white/20 whitespace-nowrap">
-            Post ID: {post._id}
-          </span>
-        </div>
+      
+        
 
         {/* Comments Section - Full width with proper alignment */}
 
@@ -143,7 +132,7 @@ const CommunityPostDetails = async ({ params }) => {
           <div className="flex items-center gap-2 mb-4">
             <FiMessageCircle className="h-5 w-5 text-lime-300" />
             <h3 className="text-lg font-semibold text-white">
-              Comments 
+              Comments ({comments.length})
             </h3>
           </div>
           <Comments postId={post._id} />

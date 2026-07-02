@@ -109,15 +109,15 @@ const CommunityCard = ({ post }) => {
       {/* Actions */}
       <div className="mt-5 flex items-center gap-5 border-t border-white/10 pt-4">
         {/* Like Button */}
-        <button className="flex items-center gap-1.5 text-sm text-white/40 transition-all duration-300 hover:scale-105 hover:text-lime-300">
-          {/* ${isLiked ? "fill-lime-300 text-lime-300" : ""} */}
+        {/* <button className="flex items-center gap-1.5 text-sm text-white/40 transition-all duration-300 hover:scale-105 hover:text-lime-300">
+          ${isLiked ? "fill-lime-300 text-lime-300" : ""}
           <FiHeart className={`h-4.5 w-4.5 transition-all duration-300 `} />
-        </button>
+        </button> */}
 
         {/* Comment Button */}
-        <button className="flex items-center gap-1.5 text-sm text-white/40 transition-all duration-300 hover:scale-105 hover:text-lime-300">
+        {/* <button className="flex items-center gap-1.5 text-sm text-white/40 transition-all duration-300 hover:scale-105 hover:text-lime-300">
           <FiMessageCircle className="h-4.5 w-4.5" />
-        </button>
+        </button> */}
 
         {/* read more Button */}
         <Link href={`/community/${post._id}`}>

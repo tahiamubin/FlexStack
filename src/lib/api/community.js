@@ -4,6 +4,17 @@ import { getTokenServer } from "../core/getTokenServer";
 
 const baseURL = process.env.BASE_URL;
 
+export const updateLike = async (postId) => {
+  const token = await getTokenServer();
+  const res = await fetch(`${baseURL}/api/community-forum/${postId}/like`, {
+    method: "PATCH",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+  return res.json();
+};
+
 export const getLatestPost = async () => {
   const res = await fetch(`${baseURL}/api/community-latest`);
   return res.json();
@@ -37,13 +48,13 @@ export const getCommunityForumById = async (id) => {
   return res.json();
 };
 
-
-
-
 // admin --> manage community froum
 export const getCommunity = async (page = 1) => {
-  const res = await fetch(`${baseURL}/api/community-forum?page=${page}&limit=9`, {
-    cache: "no-store"
-  });
-  return res.json(); 
+  const res = await fetch(
+    `${baseURL}/api/community-forum?page=${page}&limit=9`,
+    {
+      cache: "no-store",
+    },
+  );
+  return res.json();
 };

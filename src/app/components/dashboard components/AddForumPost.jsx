@@ -102,6 +102,7 @@ const AddForumPost = () => {
         userRole: user?.role || "Anonymous",
         userId: user?.id || "Anonymous",
         createdAt: new Date().toISOString(),
+        likeCount: 0,
       };
 
       console.log("Post data:", postData);

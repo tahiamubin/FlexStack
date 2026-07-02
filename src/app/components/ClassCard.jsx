@@ -131,9 +131,9 @@ const ClassCard = ({ classData }) => {
 
         {/* Actions */}
         <div className="mt-4 flex items-center gap-4 border-t border-white/10 pt-3">
-          <div className="flex items-center gap-2 text-white/40">
+          {/* <div className="flex items-center gap-2 text-white/40">
             <CommunityLikes postId={classData._id} />
-          </div>
+          </div> */}
           <div className="flex items-center gap-2 text-white/40 text-2xl">
             <AddFavClass classData={classData} ></AddFavClass>
             
