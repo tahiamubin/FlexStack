@@ -1,5 +1,6 @@
 "use server";
 
+import { json } from "better-auth";
 import { getTokenServer } from "../core/getTokenServer";
 
 const baseURL = process.env.BASE_URL;
@@ -30,6 +31,39 @@ export const deleteForum = async (postId) => {
       authorization: `Bearer ${token}`,
     },
   });
+  return res.json();
+};
+
+export const updateComment = async (commentId, data) => {
+  
+  const res = await fetch( `${baseURL}/api/community-forum/${commentId}/comment` , {
+    method: "PATCH",
+    headers: {
+     'content-type' : 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  res.json()
+}
+
+export const deleteComment = async (commentId) => {
+
+  const res = await fetch(
+    `${baseURL}/api/community-forum/${commentId}/comment`,
+    {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+       
+      },
+    },
+  );
+  if (!res.ok) {
+    const errBody = await res.json().catch(() => ({}));
+    throw new Error(
+      errBody.message || `Delete failed with status ${res.status}`,
+    );
+  }
   return res.json();
 };
 

@@ -7,10 +7,12 @@ const baseUrl = process.env.BASE_URL;
 
 
 export const createCommunityComment = async (postId, user, data) => {
+  const token = await getTokenServer()
   const res = await fetch(`${baseUrl}/api/community-forum/${postId}/comment`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      authorization: `Bearer ${token}`
     },
     body: JSON.stringify({
       userId: user?.id,
