@@ -12,14 +12,22 @@ export async function proxy(request) {
   }
 }
 
-
-
 export const config = {
   matcher: [
-   "/jobs/:id",
-   "/jobs/manage",
-   "/dashboard",
-    "/jobs/new",
-  
+    "/allclasses/:id",
+    "/dashboard/member",
+    "/dashboard/member/bookings",
+    "/dashboard/member/favorites",
+    "/dashboard/member/apply-trainer",
+    "/dashboard/trainer",
+    "/dashboard/trainer/add-class",
+    "/dashboard/trainer/forum-post",
+    "/dashboard/trainer/my-forum-post",
+    "/dashboard/admin",
+    "/dashboard/admin/users",
+    "/dashboard/admin/add-forum",
+    "/dashboard/admin/manage-classes",
+    "/dashboard/admin/manage-forum",
+    "/dashboard/admin/transactions",
   ],
 };
