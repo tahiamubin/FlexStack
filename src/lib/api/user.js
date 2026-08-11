@@ -36,3 +36,4 @@ export const getUser = async () => {
   const res = await fetch(`${baseURL}/api/alluser`);
   return res.json();
 };
+

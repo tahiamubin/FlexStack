@@ -32,6 +32,7 @@ export default function SignUpPage() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
+    console.log(user)
 
     await authClient.signUp.email({
       ...user,

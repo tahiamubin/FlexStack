@@ -123,9 +123,6 @@ const CommunityPostDetails = async ({ params }) => {
           </div>
         )}
          
-
-         
-      
         
 
         {/* Comments Section - Full width with proper alignment */}
