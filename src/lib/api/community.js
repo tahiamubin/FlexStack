@@ -73,11 +73,11 @@ export const getCommunityComment = async (postId) => {
 };
 
 export const getCommunityForumById = async (id) => {
-  const token = await getTokenServer();
+  // const token = await getTokenServer();
   const res = await fetch(`${baseURL}/api/community-forum/${id}`, {
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
+    // headers: {
+    //   authorization: `Bearer ${token}`,
+    // },
   });
   return res.json();
 };

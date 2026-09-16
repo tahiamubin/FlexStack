@@ -40,7 +40,7 @@ const formatDate = (dateString) => {
 };
 
 const TrainerApplicationsClient = ({ applications }) => {
-  console.log(applications)
+  //console.log(applications)
   const [allApplications, setAllApplications] = useState(applications);
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [feedback, setFeedback] = useState("");
@@ -49,7 +49,7 @@ const TrainerApplicationsClient = ({ applications }) => {
   // The table only ever shows pending applications — once one is
   // approved or rejected it's no longer pending and drops out of view.
   const pendingApplications = allApplications.filter(
-    (app) => (app.status || "pending") === "pending"
+    (app) => (app.status || "pending") === "pending",
   );
 
   const closeModal = () => {
@@ -70,8 +70,8 @@ const TrainerApplicationsClient = ({ applications }) => {
         prev.map((app) =>
           app._id === selectedApplication._id
             ? { ...app, status: "approved", feedback }
-            : app
-        )
+            : app,
+        ),
       );
       closeModal();
     } catch (error) {
@@ -82,24 +82,19 @@ const TrainerApplicationsClient = ({ applications }) => {
   };
 
   const handleReject = async () => {
-    if (!feedback.trim()) {
-      toast.error("Please provide feedback before rejecting.");
-      return;
-    }
-
     setIsProcessing(true);
     try {
-      await updateApplicationStatus(selectedApplication._id, {
+      await editRole(selectedApplication._id, {
         status: "rejected",
         feedback,
       });
-      toast.success("Application rejected.");
+      toast.success(`${selectedApplication.userName} rejected`);
       setAllApplications((prev) =>
         prev.map((app) =>
           app._id === selectedApplication._id
             ? { ...app, status: "rejected", feedback }
-            : app
-        )
+            : app,
+        ),
       );
       closeModal();
     } catch (error) {
@@ -302,9 +297,7 @@ const TrainerApplicationsClient = ({ applications }) => {
                     </span>
                   </div>
                 </div> */}
-                <div>
-                  {selectedApplication.bio}
-                </div>
+                <div>{selectedApplication.bio}</div>
               </div>
 
               {/* Feedback Input */}
